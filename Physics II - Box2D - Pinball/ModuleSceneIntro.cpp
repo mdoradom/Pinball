@@ -32,6 +32,14 @@ bool ModuleSceneIntro::Start()
 
 	//sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
+	player = App->player;
+
+	// Create flip flops
+
+	App->physics->CreateRectangle(100, 100, 100, 50, b2_staticBody);
+
+	App->physics->CreateRectangle(100, 200, 100, 50, b2_staticBody);
+
 	return ret;
 }
 
@@ -51,6 +59,10 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
+
+	player->moveFlipFlops();
+	player->launchBall();
+
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
 		ray_on = !ray_on;
@@ -66,7 +78,7 @@ update_status ModuleSceneIntro::Update()
 
 	if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
-		boxes.add(App->physics->CreateRectangle(App->input->GetMouseX(), App->input->GetMouseY(), 100, 50));
+		boxes.add(App->physics->CreateRectangle(App->input->GetMouseX(), App->input->GetMouseY(), 100, 50, b2_dynamicBody));
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)

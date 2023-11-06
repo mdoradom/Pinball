@@ -13,6 +13,9 @@ public:
 	update_status Update();
 	bool CleanUp();
 
+	void moveFlipFlops();
+	void launchBall();
+
 public:
 
 };

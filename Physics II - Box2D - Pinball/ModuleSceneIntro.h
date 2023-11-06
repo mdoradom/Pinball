@@ -3,6 +3,7 @@
 #include "p2List.h"
 #include "p2Point.h"
 #include "Globals.h"
+#include "ModulePlayer.h"
 
 class PhysBody;
 
@@ -21,6 +22,8 @@ public:
 	p2List<PhysBody*> circles;
 	p2List<PhysBody*> boxes;
 	p2List<PhysBody*> ricks;
+
+	ModulePlayer* player;
 
 	PhysBody* sensor;
 	bool sensed;

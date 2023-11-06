@@ -1,4 +1,5 @@
-﻿  ModulePhysics.cpp
+﻿  Application.cpp
+  ModulePhysics.cpp
 C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModulePhysics.cpp(61,60): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModulePhysics.cpp(128,23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModulePhysics.cpp(129,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
@@ -6,4 +7,63 @@ C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModulePh
 C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModulePhysics.cpp(412,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModulePhysics.cpp(413,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModulePhysics.cpp(419,27): warning C4244: 'return': conversion from 'float32' to 'int', possible loss of data
-  Pinball.vcxproj -> C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\Debug\Pinball.exe
+  ModuleSceneIntro.cpp
+C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModuleSceneIntro.cpp(39,14): error C2660: 'ModulePhysics::CreateRectangle': function does not take 4 arguments
+C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModulePhysics.h(46,12): message : see declaration of 'ModulePhysics::CreateRectangle'
+C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModuleSceneIntro.cpp(39,14): message : while trying to match the argument list '(int, int, int, int)'
+C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModuleSceneIntro.cpp(41,14): error C2660: 'ModulePhysics::CreateRectangle': function does not take 4 arguments
+C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModulePhysics.h(46,12): message : see declaration of 'ModulePhysics::CreateRectangle'
+C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModuleSceneIntro.cpp(41,14): message : while trying to match the argument list '(int, int, int, int)'
+C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModuleSceneIntro.cpp(81,25): error C2660: 'ModulePhysics::CreateRectangle': function does not take 4 arguments
+C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModulePhysics.h(46,12): message : see declaration of 'ModulePhysics::CreateRectangle'
+C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModuleSceneIntro.cpp(81,25): message : while trying to match the argument list '(int, int, int, int)'
+C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModuleSceneIntro.cpp(174,45): warning C4244: 'argument': conversion from 'TYPE' to 'TYPE', possible loss of data
+          with
+          [
+              TYPE=int
+          ]
+          and
+          [
+              TYPE=float
+          ]
+C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModuleSceneIntro.cpp(174,30): warning C4244: 'argument': conversion from 'TYPE' to 'TYPE', possible loss of data
+          with
+          [
+              TYPE=int
+          ]
+          and
+          [
+              TYPE=float
+          ]
+C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModuleSceneIntro.cpp(176,18): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModuleSceneIntro.cpp(178,70): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
+          with
+          [
+              TYPE=float
+          ]
+C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModuleSceneIntro.cpp(178,47): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
+          with
+          [
+              TYPE=float
+          ]
+C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModuleSceneIntro.cpp(181,138): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
+          with
+          [
+              TYPE=float
+          ]
+C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModuleSceneIntro.cpp(181,96): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
+          with
+          [
+              TYPE=float
+          ]
+C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModuleSceneIntro.cpp(181,57): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
+          with
+          [
+              TYPE=float
+          ]
+C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\ModuleSceneIntro.cpp(181,34): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
+          with
+          [
+              TYPE=float
+          ]
+  Generating Code...
