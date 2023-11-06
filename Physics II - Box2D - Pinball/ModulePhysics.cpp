@@ -31,27 +31,34 @@ bool ModulePhysics::Start()
 	world = new b2World(b2Vec2(GRAVITY_X, -GRAVITY_Y));
 	world->SetContactListener(this);
 
-	// needed to create joints like mouse joint
-	b2BodyDef bd;
-	ground = world->CreateBody(&bd);
+	// MAP CREATION ----------------------------------
+	
+	// Pivot -215, -385
+	int scenario[42] = {
+		133, 193,
+		131, 236,
+		215, 234,
+		215, -385,
+		-215, -385,
+		-215, 235,
+		-138, 234,
+		-130, 195,
+		-203, 158,
+		-201, -219,
+		-183, -274,
+		-150, -318,
+		-102, -345,
+		-44, -359,
+		46, -360,
+		96, -347,
+		145, -321,
+		179, -281,
+		200, -216,
+		199, 160,
+		133, 193
+	};
 
-	// big static circle as "ground" in the middle of the screen
-	int x = SCREEN_WIDTH / 2;
-	int y = SCREEN_HEIGHT / 1.5f;
-	int diameter = SCREEN_WIDTH / 2;
-
-	b2BodyDef body;
-	body.type = b2_staticBody;
-	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
-
-	b2Body* big_ball = world->CreateBody(&body);
-
-	b2CircleShape shape;
-	shape.m_radius = PIXEL_TO_METERS(diameter) * 0.5f;
-
-	b2FixtureDef fixture;
-	fixture.shape = &shape;
-	big_ball->CreateFixture(&fixture);
+	App->physics->CreateChain(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.5f, scenario, 64);
 
 	return true;
 }
@@ -154,7 +161,7 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size)
 {
 	b2BodyDef body;
-	body.type = b2_dynamicBody;
+	body.type = b2_staticBody; // TODO poner esto como parámetro para poder crear chains dinámicas y estáticas
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);
