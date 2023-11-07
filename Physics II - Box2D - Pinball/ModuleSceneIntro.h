@@ -4,6 +4,7 @@
 #include "p2Point.h"
 #include "Globals.h"
 #include "ModulePlayer.h"
+#include "ModulePhysics.h"
 
 class PhysBody;
 
@@ -24,6 +25,9 @@ public:
 	p2List<PhysBody*> ricks;
 
 	ModulePlayer* player;
+
+	PhysBody* flipFlopLeft;
+	PhysBody* flipFlopRight;
 
 	PhysBody* sensor;
 	bool sensed;

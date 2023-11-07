@@ -1,2 +1,0 @@
-C:\Users\mariodm1\Downloads\Physics II - Box2D - Pinball\Debug\Pinball.exe
-C:\Users\mariodm1\Documents\GitHub\Pinball\Physics II - Box2D - Pinball\Debug\Pinball.exe

@@ -2,6 +2,8 @@
 #include "Application.h"
 #include "ModulePlayer.h"
 #include "ModuleInput.h"
+#include "ModuleSceneIntro.h"
+#include "ModulePhysics.h"
 #include "SDL\include\SDL.h"
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -29,6 +31,8 @@ bool ModulePlayer::CleanUp()
 void ModulePlayer::moveFlipFlops() {
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) {
+		App->scene_intro->flipFlopLeft->body->ApplyForce({ 10, 80 }, { 0,0 }, true);
+
 		LOG("Лорем Ипсум");
 	}
 
