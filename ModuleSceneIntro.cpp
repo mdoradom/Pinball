@@ -36,17 +36,17 @@ bool ModuleSceneIntro::Start()
 
 	// Create flip flops
 
-	flipFlopLeft = App->physics->CreateRectangle(400, 650, 100, 50, b2_dynamicBody);
+	flipFlopLeft = App->physics->CreateRectangle(400, 650, 80, 20, b2_dynamicBody);
 
-	flipFlopRight = App->physics->CreateRectangle(600, 650, 100, 50, b2_dynamicBody);
+	flipFlopRight = App->physics->CreateRectangle(600, 650, 80, 20, b2_dynamicBody);
 
 	flipFlopLeftAnchor = App->physics->CreateRectangle(400, 650, 1, 1, b2_staticBody);
 
 	flipFlopRightAnchor = App->physics->CreateRectangle(600, 650, 1, 1, b2_staticBody);
 
-	App->physics->CreateRevoluteJoint(flipFlopLeft, {0,0}, flipFlopLeftAnchor, {0,0}, 30, 15, 0, false, true);
+	App->physics->CreateRevoluteJoint(flipFlopLeftAnchor, {0,0}, flipFlopLeft, {-1,0}, 30, 15, 0, false, true);
 
-	App->physics->CreateRevoluteJoint(flipFlopRight, {0,0}, flipFlopRightAnchor, {0,0}, 30, 15, 0, false, true);
+	App->physics->CreateRevoluteJoint(flipFlopRightAnchor, {0,0}, flipFlopRight, {1,0}, 0, 45, 165, false, true);
 
 	return ret;
 }
