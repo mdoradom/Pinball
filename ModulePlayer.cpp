@@ -30,6 +30,7 @@ bool ModulePlayer::CleanUp()
 
 void ModulePlayer::moveFlipFlops() {
 
+
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) {
 
 		App->scene_intro->flipFlopLeft->body->ApplyForce({ 10,80 }, { 0,0 }, true);
@@ -38,6 +39,9 @@ void ModulePlayer::moveFlipFlops() {
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
+
+		App->scene_intro->flipFlopRight->body->ApplyForce({ 10,80 }, { 0,0 }, true);
+
 		LOG("ole la derecha ARRIBA ESPAÑIA");
 	}
 

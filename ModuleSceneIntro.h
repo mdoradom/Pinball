@@ -27,6 +27,8 @@ public:
 	ModulePlayer* player;
 
 	PhysBody* sensor;
+
+	PhysBody* scene;
 	bool sensed;
 
 	SDL_Texture* circle;
@@ -35,6 +37,8 @@ public:
 
 	PhysBody* flipFlopLeft;
 	PhysBody* flipFlopRight;
+	PhysBody* flipFlopLeftAnchor;
+	PhysBody* flipFlopRightAnchor;
 
 	uint bonus_fx;
 	p2Point<int> ray;
