@@ -38,6 +38,22 @@ public:
 	int width, height;
 	b2Body* body;
 	Module* listener;
+
+	void ApplyBoost(float boostForce) {
+		
+		if (body) {
+			// Obtener la velocidad actual del cuerpo
+			b2Vec2 currentVelocity = body->GetLinearVelocity();
+
+			// Normalizar la velocidad actual (manteniendo la dirección) y luego ajustar la magnitud con el impulso
+			b2Vec2 newVelocity = currentVelocity;
+			newVelocity.Normalize();
+			newVelocity *= boostForce;
+
+			// Establecer la nueva velocidad al cuerpo
+			body->SetLinearVelocity(newVelocity);
+		}
+	}
 };
 
 // Module --------------------------------------

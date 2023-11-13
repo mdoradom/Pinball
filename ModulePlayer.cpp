@@ -53,6 +53,13 @@ void ModulePlayer::moveFlipFlops() {
 		LOG("ole la derecha ARRIBA ESPAÑIA");
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
+
+		App->scene_intro->circles.getFirst()->data->ApplyBoost(10);
+
+		LOG("ole la derecha ARRIBA ESPAÑIA");
+	}
+
 }
 
 void ModulePlayer::launchBall() {
