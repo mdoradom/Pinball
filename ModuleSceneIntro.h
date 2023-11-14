@@ -29,6 +29,7 @@ public:
 	PhysBody* sensor;
 
 	PhysBody* scene;
+	PhysBody* launcher;
 	bool sensed;
 
 	SDL_Texture* circle;
@@ -39,6 +40,7 @@ public:
 	PhysBody* flipFlopRight;
 	PhysBody* flipFlopLeftAnchor;
 	PhysBody* flipFlopRightAnchor;
+	PhysBody* launcherAnchor;
 
 	uint bonus_fx;
 	p2Point<int> ray;

@@ -44,9 +44,13 @@ bool ModuleSceneIntro::Start()
 
 	flipFlopRightAnchor = App->physics->CreateRectangle(600, 650, 1, 1, b2_staticBody);
 
+	launcherAnchor = App->physics->CreateRectangle(500, 200, 1, 1, b2_staticBody);
+
 	App->physics->CreateRevoluteJoint(flipFlopLeftAnchor, {0,0}, flipFlopLeft, {-1,0}, 30, 15, 0, false, true);
 
 	App->physics->CreateRevoluteJoint(flipFlopRightAnchor, {0,0}, flipFlopRight, {1,0}, 15, 30, 0, false, true);
+
+	App->physics->CreateRevoluteJoint(launcherAnchor, {0,0}, App->scene_intro->launcher, {1,0}, 15, 30, 0, false, true);
 
 	return ret;
 }
@@ -80,7 +84,7 @@ update_status ModuleSceneIntro::Update()
 
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25));
+		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25, b2_dynamicBody ));
 		circles.getLast()->data->listener = this;
 	}
 

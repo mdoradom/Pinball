@@ -65,6 +65,8 @@ bool ModulePhysics::Start()
 
 	App->scene_intro->scene = App->physics->CreateChain(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.5f, scenario, 41);
 
+	App->scene_intro->launcher = App->physics->CreateRectangle(500, 200, 20, 40, b2_dynamicBody);
+
 	return true;
 }
 
