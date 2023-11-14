@@ -45,7 +45,7 @@ void ModulePlayer::moveFlipFlops() {
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
 
 		App->scene_intro->flipFlopRight->body->ApplyForce(
-			{ 10,-80 }, 
+			{ -10,-80 }, 
 			{ 0,0 }, 
 			true
 		);
