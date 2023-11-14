@@ -5,6 +5,7 @@
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
+#include "ModulePhysics.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -35,9 +36,17 @@ bool ModuleSceneIntro::Start()
 
 	// Create flip flops
 
-	flipFlopLeft = App->physics->CreateRectangle(100, 100, 100, 50, b2_staticBody);
+	flipFlopLeft = App->physics->CreateRectangle(400, 650, 80, 20, b2_dynamicBody);
 
-	flipFlopRight = App->physics->CreateRectangle(100, 200, 100, 50, b2_staticBody);
+	flipFlopRight = App->physics->CreateRectangle(600, 650, 80, 20, b2_dynamicBody);
+
+	flipFlopLeftAnchor = App->physics->CreateRectangle(400, 650, 1, 1, b2_staticBody);
+
+	flipFlopRightAnchor = App->physics->CreateRectangle(600, 650, 1, 1, b2_staticBody);
+
+	App->physics->CreateRevoluteJoint(flipFlopLeftAnchor, {0,0}, flipFlopLeft, {-1,0}, 30, 15, 0, false, true);
+
+	App->physics->CreateRevoluteJoint(flipFlopRightAnchor, {0,0}, flipFlopRight, {1,0}, 15, 30, 0, false, true);
 
 	return ret;
 }
