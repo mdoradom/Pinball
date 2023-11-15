@@ -30,6 +30,7 @@ public:
 
 	PhysBody* scene;
 	PhysBody* launcher;
+
 	bool sensed;
 
 	SDL_Texture* circle;

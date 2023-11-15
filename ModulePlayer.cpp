@@ -53,9 +53,9 @@ void ModulePlayer::moveFlipFlops() {
 		LOG("ole la derecha ARRIBA ESPAÑIA");
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
 
-		App->scene_intro->launcher->ApplyBoost(10);
+		App->scene_intro->launcher->ApplyVerticalImpulse(50);
 
 		LOG("ole la derecha ARRIBA ESPAÑIA");
 

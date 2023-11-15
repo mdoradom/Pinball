@@ -215,6 +215,26 @@ b2RevoluteJoint* ModulePhysics::CreateRevoluteJoint(PhysBody* A, b2Vec2 anchorA,
 	return (b2RevoluteJoint*)world->CreateJoint(&revoluteJointDef);
 }
 
+// TODO crear la funcion para crear el joint que restrinja el movimiento sobre un eje
+// b2Vec2(0, 1) eje Y
+// b2Vec2(1, 0) eje X
+b2PrismaticJoint* ModulePhysics::CreatePrismaticJoint(PhysBody* A, b2Vec2 anchorA, PhysBody* B, b2Vec2 anchorB, float lowerTranslation, float upperTranslation, bool collideConnected, bool enableLimit, b2Vec2 axis) {
+
+	b2PrismaticJointDef prismaticJointDef;
+	prismaticJointDef.bodyA = A->body;
+	prismaticJointDef.bodyB = B->body;
+	prismaticJointDef.collideConnected = collideConnected;
+	prismaticJointDef.localAnchorA.Set(anchorA.x, anchorA.y);
+	prismaticJointDef.localAnchorB.Set(anchorB.x, anchorB.y);
+	prismaticJointDef.enableLimit = enableLimit;
+	prismaticJointDef.lowerTranslation = lowerTranslation;
+	prismaticJointDef.upperTranslation = upperTranslation;
+	prismaticJointDef.localAxisA = axis;
+
+	return (b2PrismaticJoint*)world->CreateJoint(&prismaticJointDef);
+}
+
+
 // 
 update_status ModulePhysics::PostUpdate()
 {

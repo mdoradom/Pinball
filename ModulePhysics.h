@@ -54,6 +54,15 @@ public:
 			body->SetLinearVelocity(newVelocity);
 		}
 	}
+
+	void PhysBody::ApplyVerticalImpulse(float impulse) {
+		if (body) {
+			b2Vec2 currentVelocity = body->GetLinearVelocity();
+			b2Vec2 newVelocity = b2Vec2(currentVelocity.x, -impulse); // Invertir el impulso
+			body->SetLinearVelocity(newVelocity);
+		}
+	}
+
 };
 
 // Module --------------------------------------
@@ -73,6 +82,9 @@ public:
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 	PhysBody* CreateChain(int x, int y, int* points, int size);
 	b2RevoluteJoint* CreateRevoluteJoint(PhysBody* A, b2Vec2 anchorA, PhysBody* B, b2Vec2 anchorB, float lowerAngle, float upperAngle, float referenceAngle, bool collideConnected, bool enableLimit);
+	b2PrismaticJoint* CreatePrismaticJoint(PhysBody* A, b2Vec2 anchorA, PhysBody* B, b2Vec2 anchorB, float lowerTranslation, float upperTranslation, bool collideConnected, bool enableLimit, b2Vec2 axis);
+
+
 
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
