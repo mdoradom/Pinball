@@ -40,27 +40,27 @@ bool ModuleSceneIntro::Start()
 
 	player = App->player;
 
-	// Create flip flops
-	flipFlopLeft = App->physics->CreateRectangle(400, 650, 80, 20, b2_dynamicBody);
-	flipFlopRight = App->physics->CreateRectangle(600, 650, 80, 20, b2_dynamicBody);
+	//// Create flip flops
+	//flipFlopLeft = App->physics->CreateRectangle(400, 650, 80, 20, b2_dynamicBody);
+	//flipFlopRight = App->physics->CreateRectangle(600, 650, 80, 20, b2_dynamicBody);
 
-	// Create anchors
-	flipFlopLeftAnchor = App->physics->CreateRectangle(400, 650, 1, 1, b2_staticBody);
-	flipFlopRightAnchor = App->physics->CreateRectangle(600, 650, 1, 1, b2_staticBody);
-	launcherAnchor = App->physics->CreateRectangle(400, 400, 1, 1, b2_staticBody);
+	//// Create anchors
+	//flipFlopLeftAnchor = App->physics->CreateRectangle(400, 650, 1, 1, b2_staticBody);
+	//flipFlopRightAnchor = App->physics->CreateRectangle(600, 650, 1, 1, b2_staticBody);
+	//launcherAnchor = App->physics->CreateRectangle(400, 400, 1, 1, b2_staticBody);
 
 		// Deactivate anchors collisions
-	flipFlopLeftAnchor->body->GetFixtureList()->SetSensor(true);
-	flipFlopRightAnchor->body->GetFixtureList()->SetSensor(true);
-	launcherAnchor->body->GetFixtureList()->SetSensor(true);
+	//flipFlopLeftAnchor->body->GetFixtureList()->SetSensor(true);
+	//flipFlopRightAnchor->body->GetFixtureList()->SetSensor(true);
+	//launcherAnchor->body->GetFixtureList()->SetSensor(true);
 
-	// Create Joints
-	App->physics->CreateRevoluteJoint(flipFlopLeftAnchor, {0,0}, flipFlopLeft, {-1,0}, 30, 15, 0, false, true);
-	App->physics->CreateRevoluteJoint(flipFlopRightAnchor, {0,0}, flipFlopRight, {1,0}, 15, 30, 0, false, true);
+	//// Create Joints
+	//App->physics->CreateRevoluteJoint(flipFlopLeftAnchor, {0,0}, flipFlopLeft, {-1,0}, 30, 15, 0, false, true);
+	//App->physics->CreateRevoluteJoint(flipFlopRightAnchor, {0,0}, flipFlopRight, {1,0}, 15, 30, 0, false, true);
 
 	float lowerLimit = 350;
 	float upperLimit = 450;
-	App->physics->CreatePrismaticJoint(launcherAnchor, { 0,0 }, App->scene_intro->launcher, { 0,0 }, lowerLimit, upperLimit, false, false, {0,1});
+	//App->physics->CreatePrismaticJoint(launcherAnchor, { 0,0 }, App->scene_intro->launcher, { 0,0 }, lowerLimit, upperLimit, false, false, {0,1});
 
 	App->audio->PlayMusic("pinball/audio/background-music.wav", 0.0f);
 
@@ -92,14 +92,14 @@ update_status ModuleSceneIntro::Update()
 	App->renderer->Blit(map, 0, 0, NULL, 1.0f, 0);
 
 	// Draw flip flops
-	int flipFlopLeftX, flipFlopLeftY, flipFlopRightX, flipFlopRightY;
-	flipFlopLeft->GetPosition(flipFlopLeftX, flipFlopLeftY);
-	flipFlopRight->GetPosition(flipFlopRightX, flipFlopRightY);
+	//int flipFlopLeftX, flipFlopLeftY, flipFlopRightX, flipFlopRightY;
+	//flipFlopLeft->GetPosition(flipFlopLeftX, flipFlopLeftY);
+	//flipFlopRight->GetPosition(flipFlopRightX, flipFlopRightY);
 
-	App->renderer->Blit(flipFlopLeftTexture, flipFlopLeftX, flipFlopLeftY, NULL, 1.0f, flipFlopLeft->GetRotation());
-	App->renderer->Blit(flipFlopRightTexture, flipFlopRightX, flipFlopRightY, NULL, 1.0f, flipFlopRight->GetRotation());
+	//App->renderer->Blit(flipFlopLeftTexture, flipFlopLeftX, flipFlopLeftY, NULL, 1.0f, flipFlopLeft->GetRotation());
+	//App->renderer->Blit(flipFlopRightTexture, flipFlopRightX, flipFlopRightY, NULL, 1.0f, flipFlopRight->GetRotation());
 
-	player->moveFlipFlops();
+	//player->moveFlipFlops();
 	player->launchBall();
 
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
