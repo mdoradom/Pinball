@@ -9,7 +9,7 @@
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	circle = box = rick = NULL;
+	ball = box = rick = NULL;
 	ray_on = false;
 	sensed = false;
 }
@@ -29,9 +29,9 @@ bool ModuleSceneIntro::Start()
 	map = App->textures->Load("pinball/textures/map.png");
 	flipFlopLeftTexture = App->textures->Load("pinball/textures/flipflop_left.png");
 	flipFlopRightTexture = App->textures->Load("pinball/textures/flipflop_right.png");
+	ball = App->textures->Load("pinball/textures/ball.png");
 
 
-	circle = App->textures->Load("pinball/wheel.png"); 
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
@@ -73,7 +73,7 @@ bool ModuleSceneIntro::CleanUp()
 	LOG("Unloading Intro scene");
 
 	// Unload textures
-	App->textures->Unload(circle);
+	App->textures->Unload(ball);
 	App->textures->Unload(box);
 	App->textures->Unload(rick);
 
@@ -177,7 +177,7 @@ update_status ModuleSceneIntro::Update()
 	{
 		int x, y;
 		c->data->GetPosition(x, y);	
-		App->renderer->Blit(circle, x, y, NULL, 1.0f, c->data->GetRotation());
+		App->renderer->Blit(ball, x, y, NULL, 1.0f, c->data->GetRotation());
 		c = c->next;
 	}
 

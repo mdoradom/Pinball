@@ -33,13 +33,13 @@ public:
 
 	bool sensed;
 
-	SDL_Texture* circle;
 	SDL_Texture* box;
 	SDL_Texture* rick;
 
 	SDL_Texture* map;
 	SDL_Texture* flipFlopLeftTexture;
 	SDL_Texture* flipFlopRightTexture;
+	SDL_Texture* ball;
 
 	PhysBody* flipFlopLeft;
 	PhysBody* flipFlopRight;
