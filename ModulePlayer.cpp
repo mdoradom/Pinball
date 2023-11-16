@@ -20,8 +20,9 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 
 	// Cargar Fx
-	flopSound = App->audio->LoadFx("pinball/audio/Fx/bonus.ogg");
+	flopSound = App->audio->LoadFx("pinball/audio/Fx/flops-sound.ogg");
 	boostSound = App->audio->LoadFx("pinball/audio/Fx/boost.ogg");
+	pointSound = App->audio->LoadFx("pinball/audio/Fx/bonus.ogg");
 
 	return true;
 }
@@ -96,9 +97,9 @@ void ModulePlayer::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 }
 
 void ModulePlayer::IncreaseScore(int points) {
+	
 	score += points;
-	// Puedes agregar aquí cualquier lógica adicional que necesites cuando la puntuación aumenta.
-	// Por ejemplo, mostrar un mensaje, reproducir un sonido, etc.
-
+	
+	App->audio->PlayFx(pointSound);
 }
 

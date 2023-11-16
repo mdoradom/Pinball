@@ -21,6 +21,7 @@ public:
 	// Fx
 	unsigned int flopSound;
 	unsigned int boostSound;
+	unsigned int pointSound;
 
 	virtual void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 	
