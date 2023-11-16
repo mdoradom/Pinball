@@ -219,7 +219,7 @@ bool ModulePhysics::Start()
 	App->scene_intro->scene = App->physics->CreateChain(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.5f, collider4, 27);
 	App->scene_intro->scene = App->physics->CreateChain(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.5f, collider5, 9);
 
-	App->scene_intro->launcher = App->physics->CreateRectangle(575, 890, 45, 40, b2_dynamicBody);
+	App->scene_intro->launcher = App->physics->CreateRectangle(575, 890, 45, 20, b2_dynamicBody);
 
 	return true; 
 }
@@ -255,7 +255,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType bodyT
 	shape.m_radius = PIXEL_TO_METERS(radius);
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
-	fixture.density = 1.0f;
+	fixture.density = 0.5f;
 
 	b->CreateFixture(&fixture);
 
