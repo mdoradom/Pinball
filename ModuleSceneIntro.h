@@ -38,6 +38,8 @@ public:
 	SDL_Texture* rick;
 
 	SDL_Texture* map;
+	SDL_Texture* flipFlopLeftTexture;
+	SDL_Texture* flipFlopRightTexture;
 
 	PhysBody* flipFlopLeft;
 	PhysBody* flipFlopRight;

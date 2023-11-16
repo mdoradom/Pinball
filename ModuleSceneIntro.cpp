@@ -25,7 +25,10 @@ bool ModuleSceneIntro::Start()
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
-	map = App->textures->Load("pinball/textures/map.png"); 
+	// Load textures
+	map = App->textures->Load("pinball/textures/map.png");
+	flipFlopLeftTexture = App->textures->Load("pinball/textures/flipflop_left.png");
+	flipFlopRightTexture = App->textures->Load("pinball/textures/flipflop_right.png");
 
 
 	circle = App->textures->Load("pinball/wheel.png"); 
@@ -75,6 +78,8 @@ bool ModuleSceneIntro::CleanUp()
 	App->textures->Unload(rick);
 
 	App->textures->Unload(map);
+	App->textures->Unload(flipFlopLeftTexture);
+	App->textures->Unload(flipFlopRightTexture);
 
 	return true;
 }
@@ -85,6 +90,14 @@ update_status ModuleSceneIntro::Update()
 
 	// Draw map
 	App->renderer->Blit(map, 0, 0, NULL, 1.0f, 0);
+
+	// Draw flip flops
+	int flipFlopLeftX, flipFlopLeftY, flipFlopRightX, flipFlopRightY;
+	flipFlopLeft->GetPosition(flipFlopLeftX, flipFlopLeftY);
+	flipFlopRight->GetPosition(flipFlopRightX, flipFlopRightY);
+
+	App->renderer->Blit(flipFlopLeftTexture, flipFlopLeftX, flipFlopLeftY, NULL, 1.0f, flipFlopLeft->GetRotation());
+	App->renderer->Blit(flipFlopRightTexture, flipFlopRightX, flipFlopRightY, NULL, 1.0f, flipFlopRight->GetRotation());
 
 	player->moveFlipFlops();
 	player->launchBall();
