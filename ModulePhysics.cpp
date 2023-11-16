@@ -38,7 +38,7 @@ bool ModulePhysics::Start()
 
 	// MAP CREATION ----------------------------------
 	
-// Pivot -512, -635
+	// Pivot -512, -635
 	int scenario[182] = {
 		-445, 261,
 		1, 262,
@@ -134,7 +134,7 @@ bool ModulePhysics::Start()
 	};
 
 	// Pivot -510, -638
-// Pivot -512, -635
+	// Pivot -512, -635
 	int collider1[40] = {
 		-383, -336,
 		-359, -336,
@@ -219,9 +219,9 @@ bool ModulePhysics::Start()
 	App->scene_intro->scene = App->physics->CreateChain(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.5f, collider4, 27);
 	App->scene_intro->scene = App->physics->CreateChain(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.5f, collider5, 9);
 
-	App->scene_intro->launcher = App->physics->CreateRectangle(500, 200, 20, 40, b2_dynamicBody);
+	App->scene_intro->launcher = App->physics->CreateRectangle(575, 890, 45, 40, b2_dynamicBody);
 
-	return true;
+	return true; 
 }
 
 // 
