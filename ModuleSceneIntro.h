@@ -37,6 +37,8 @@ public:
 	SDL_Texture* box;
 	SDL_Texture* rick;
 
+	SDL_Texture* map;
+
 	PhysBody* flipFlopLeft;
 	PhysBody* flipFlopRight;
 	PhysBody* flipFlopLeftAnchor;

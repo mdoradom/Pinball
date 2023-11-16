@@ -25,6 +25,9 @@ bool ModuleSceneIntro::Start()
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
+	map = App->textures->Load("pinball/textures/map.png"); 
+
+
 	circle = App->textures->Load("pinball/wheel.png"); 
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
@@ -71,12 +74,17 @@ bool ModuleSceneIntro::CleanUp()
 	App->textures->Unload(box);
 	App->textures->Unload(rick);
 
+	App->textures->Unload(map);
+
 	return true;
 }
 
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
+
+	// Draw map
+	App->renderer->Blit(map, 0, 0, NULL, 1.0f, 0);
 
 	player->moveFlipFlops();
 	player->launchBall();
