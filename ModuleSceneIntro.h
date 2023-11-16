@@ -40,6 +40,7 @@ public:
 	SDL_Texture* flipFlopLeftTexture;
 	SDL_Texture* flipFlopRightTexture;
 	SDL_Texture* ball;
+	SDL_Texture* elevator;
 
 	PhysBody* flipFlopLeft;
 	PhysBody* flipFlopRight;

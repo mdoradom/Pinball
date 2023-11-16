@@ -30,6 +30,7 @@ bool ModuleSceneIntro::Start()
 	flipFlopLeftTexture = App->textures->Load("pinball/textures/flipflop_left.png");
 	flipFlopRightTexture = App->textures->Load("pinball/textures/flipflop_right.png");
 	ball = App->textures->Load("pinball/textures/ball.png");
+	elevator = App->textures->Load("pinball/textures/elevator.png");
 
 
 	box = App->textures->Load("pinball/crate.png");
@@ -80,6 +81,7 @@ bool ModuleSceneIntro::CleanUp()
 	App->textures->Unload(map);
 	App->textures->Unload(flipFlopLeftTexture);
 	App->textures->Unload(flipFlopRightTexture);
+	App->textures->Unload(elevator);
 
 	return true;
 }
@@ -96,22 +98,19 @@ update_status ModuleSceneIntro::Update()
 	flipFlopLeft->GetPosition(flipFlopLeftX, flipFlopLeftY);
 	flipFlopRight->GetPosition(flipFlopRightX, flipFlopRightY);
 
-	App->renderer->Blit(flipFlopLeftTexture, flipFlopLeftX, flipFlopLeftY, NULL, 1.0f, flipFlopLeft->GetRotation());
-	App->renderer->Blit(flipFlopRightTexture, flipFlopRightX, flipFlopRightY, NULL, 1.0f, flipFlopRight->GetRotation());
+	App->renderer->Blit(flipFlopLeftTexture, flipFlopLeftX, flipFlopLeftY-18, NULL, 1.0f, flipFlopLeft->GetRotation());
+	App->renderer->Blit(flipFlopRightTexture, flipFlopRightX, flipFlopRightY-18, NULL, 1.0f, flipFlopRight->GetRotation());
+
+	int launcherX, launcherY;
+	launcher->GetPosition(launcherX, launcherY);
+	App->renderer->Blit(elevator, launcherX, launcherY, NULL, 1.0f, launcher->GetRotation());
 
 	player->moveFlipFlops();
 	player->launchBall();
 
-	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-	{
-		ray_on = !ray_on;
-		ray.x = App->input->GetMouseX();
-		ray.y = App->input->GetMouseY();
-	}
-
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 15, b2_dynamicBody ));
+		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 16, b2_dynamicBody ));
 		circles.getLast()->data->listener = this;
 	}
 
