@@ -5,6 +5,7 @@
 #include "ModuleSceneIntro.h"
 #include "ModulePhysics.h"
 #include "SDL\include\SDL.h"
+#include "ModuleAudio.h"
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -17,6 +18,12 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player");
+
+	// Cargar Fx
+	flopSound = App->audio->LoadFx("pinball/audio/Fx/flops-sound.ogg");
+	boostSound = App->audio->LoadFx("pinball/audio/Fx/boost.ogg");
+	pointSound = App->audio->LoadFx("pinball/audio/Fx/bonus.ogg");
+
 	return true;
 }
 
@@ -34,10 +41,12 @@ void ModulePlayer::moveFlipFlops() {
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) {
 
 		App->scene_intro->flipFlopLeft->body->ApplyForce(
-			{ 10,80 }, 
+			{ 0,120 }, 
 			{ 0,0 }, 
 			true
 		);
+
+		App->audio->PlayFx(flopSound);
 
 		LOG("Лорем Ипсум");
 	}
@@ -45,19 +54,24 @@ void ModulePlayer::moveFlipFlops() {
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
 
 		App->scene_intro->flipFlopRight->body->ApplyForce(
-			{ 10,-80 }, 
+			{ 0,-80 }, 
 			{ 0,0 }, 
 			true
 		);
 
+		App->audio->PlayFx(flopSound);
+
 		LOG("ole la derecha ARRIBA ESPAÑIA");
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
 
-		App->scene_intro->circles.getFirst()->data->ApplyBoost(10);
+		App->scene_intro->launcher->ApplyVerticalImpulse(50);
+
+		App->audio->PlayFx(boostSound);
 
 		LOG("ole la derecha ARRIBA ESPAÑIA");
+
 	}
 
 }
@@ -76,5 +90,16 @@ update_status ModulePlayer::Update()
 	return UPDATE_CONTINUE;
 }
 
+void ModulePlayer::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 
+	//Aumentar la puntuación en cualquier colisión de colliders.
+	IncreaseScore(10);
+}
+
+void ModulePlayer::IncreaseScore(int points) {
+	
+	score += points;
+	
+	App->audio->PlayFx(pointSound);
+}
 

@@ -29,16 +29,24 @@ public:
 	PhysBody* sensor;
 
 	PhysBody* scene;
+	PhysBody* launcher;
+
 	bool sensed;
 
-	SDL_Texture* circle;
 	SDL_Texture* box;
 	SDL_Texture* rick;
+
+	SDL_Texture* map;
+	SDL_Texture* flipFlopLeftTexture;
+	SDL_Texture* flipFlopRightTexture;
+	SDL_Texture* ball;
+	SDL_Texture* elevator;
 
 	PhysBody* flipFlopLeft;
 	PhysBody* flipFlopRight;
 	PhysBody* flipFlopLeftAnchor;
 	PhysBody* flipFlopRightAnchor;
+	PhysBody* launcherAnchor;
 
 	uint bonus_fx;
 	p2Point<int> ray;

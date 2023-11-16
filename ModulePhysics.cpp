@@ -38,34 +38,190 @@ bool ModulePhysics::Start()
 
 	// MAP CREATION ----------------------------------
 	
-	// Pivot -215, -385
-	int scenario[42] = {
-		133, 193,
-		131, 236,
-		215, 234,
-		215, -385,
-		-215, -385,
-		-215, 235,
-		-138, 234,
-		-130, 195,
-		-203, 158,
-		-201, -219,
-		-183, -274,
-		-150, -318,
-		-102, -345,
-		-44, -359,
-		46, -360,
-		96, -347,
-		145, -321,
-		179, -281,
-		200, -216,
-		199, 160,
-		133, 193
+	// Pivot -512, -635
+	int scenario[182] = {
+		-445, 261,
+		1, 262,
+		1, 87,
+		-8, 103,
+		-20, 120,
+		-39, 141,
+		-65, 163,
+		-90, 178,
+		-110, 187,
+		-128, 193,
+		-146, 197,
+		-164, 198,
+		-164, 168,
+		-151, 166,
+		-136, 163,
+		-117, 156,
+		-100, 148,
+		-86, 140,
+		-74, 132,
+		-64, 124,
+		-48, 110,
+		-29, 87,
+		-18, 68,
+		-5, 42,
+		1, 22,
+		1, -459,
+		-9, -470,
+		-21, -479,
+		-32, -483,
+		-45, -485,
+		-58, -485,
+		-58, -521,
+		-45, -521,
+		-30, -521,
+		-13, -516,
+		3, -508,
+		15, -498,
+		25, -486,
+		33, -475,
+		38, -461,
+		38, 262,
+		91, 262,
+		91, -524,
+		86, -536,
+		77, -550,
+		65, -562,
+		50, -571,
+		35, -577,
+		22, -578,
+		-371, -578,
+		-401, -576,
+		-420, -570,
+		-435, -560,
+		-441, -554,
+		-446, -542,
+		-446, -265,
+		-442, -259,
+		-437, -252,
+		-433, -247,
+		-429, -242,
+		-429, -231,
+		-446, -231,
+		-446, 22,
+		-439, 40,
+		-434, 52,
+		-427, 65,
+		-419, 80,
+		-406, 98,
+		-392, 114,
+		-377, 127,
+		-362, 138,
+		-343, 149,
+		-332, 154,
+		-316, 160,
+		-299, 164,
+		-282, 168,
+		-282, 199,
+		-299, 197,
+		-317, 193,
+		-338, 185,
+		-353, 178,
+		-367, 170,
+		-380, 161,
+		-395, 150,
+		-406, 140,
+		-419, 126,
+		-428, 115,
+		-436, 104,
+		-443, 90,
+		-446, 84,
+		-446, 261
 	};
 
-	App->scene_intro->scene = App->physics->CreateChain(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.5f, scenario, 41);
+	// Pivot -510, -638
+	// Pivot -512, -635
+	int collider1[40] = {
+		-383, -336,
+		-359, -336,
+		-359, -388,
+		-354, -408,
+		-346, -422,
+		-336, -432,
+		-322, -439,
+		-264, -439,
+		-264, -464,
+		-294, -464,
+		-311, -464,
+		-326, -463,
+		-336, -460,
+		-346, -453,
+		-358, -443,
+		-369, -431,
+		-377, -416,
+		-382, -403,
+		-384, -390,
+		-384, -336
+	};
 
-	return true;
+	// Pivot -512, -635
+	int collider2[28] = {
+		-378, -93,
+		-384, -96,
+		-388, -100,
+		-390, -105,
+		-390, -175,
+		-386, -180,
+		-381, -185,
+		-376, -186,
+		-367, -186,
+		-362, -183,
+		-300, -106,
+		-301, -97,
+		-306, -93,
+		-375, -93
+	};
+
+	// Pivot -512, -635
+	int collider3[10] = {
+		-396, -13,
+		-385, -23,
+		-336, 26,
+		-346, 36,
+		-395, -13
+	};
+
+	// Pivot -512, -635
+	int collider4[28] = {
+		-142, -96,
+		-145, -102,
+		-143, -107,
+		-80, -185,
+		-75, -186,
+		-65, -186,
+		-59, -181,
+		-55, -175,
+		-55, -106,
+		-57, -100,
+		-61, -96,
+		-65, -93,
+		-136, -93,
+		-141, -95
+	};
+
+	// Pivot -512, -635
+	int collider5[10] = {
+		-107, 26,
+		-98, 36,
+		-48, -14,
+		-59, -21,
+		-107, 26
+	};
+
+	App->scene_intro->scene = App->physics->CreateChain(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.5f, scenario, 181);
+	App->scene_intro->scene = App->physics->CreateChain(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.5f, collider1, 39);
+	App->scene_intro->scene = App->physics->CreateChain(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.5f, collider2, 27);
+	App->scene_intro->scene = App->physics->CreateChain(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.5f, collider3, 9);
+	App->scene_intro->scene = App->physics->CreateChain(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.5f, collider4, 27);
+	App->scene_intro->scene = App->physics->CreateChain(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.5f, collider5, 9);
+
+	App->scene_intro->launcher = App->physics->CreateRectangle(575, 890, 45, 20, b2_dynamicBody);
+
+	return true; 
 }
 
 // 
@@ -87,10 +243,10 @@ update_status ModulePhysics::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
-PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius)
+PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType bodyType)
 {
 	b2BodyDef body;
-	body.type = b2_dynamicBody;
+	body.type = bodyType;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);
@@ -99,7 +255,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius)
 	shape.m_radius = PIXEL_TO_METERS(radius);
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
-	fixture.density = 1.0f;
+	fixture.density = 0.5f;
 
 	b->CreateFixture(&fixture);
 
@@ -212,6 +368,26 @@ b2RevoluteJoint* ModulePhysics::CreateRevoluteJoint(PhysBody* A, b2Vec2 anchorA,
 
 	return (b2RevoluteJoint*)world->CreateJoint(&revoluteJointDef);
 }
+
+// TODO crear la funcion para crear el joint que restrinja el movimiento sobre un eje
+// b2Vec2(0, 1) eje Y
+// b2Vec2(1, 0) eje X
+b2PrismaticJoint* ModulePhysics::CreatePrismaticJoint(PhysBody* A, b2Vec2 anchorA, PhysBody* B, b2Vec2 anchorB, float lowerTranslation, float upperTranslation, bool collideConnected, bool enableLimit, b2Vec2 axis) {
+
+	b2PrismaticJointDef prismaticJointDef;
+	prismaticJointDef.bodyA = A->body;
+	prismaticJointDef.bodyB = B->body;
+	prismaticJointDef.collideConnected = collideConnected;
+	prismaticJointDef.localAnchorA.Set(anchorA.x, anchorA.y);
+	prismaticJointDef.localAnchorB.Set(anchorB.x, anchorB.y);
+	prismaticJointDef.enableLimit = enableLimit;
+	prismaticJointDef.lowerTranslation = lowerTranslation;
+	prismaticJointDef.upperTranslation = upperTranslation;
+	prismaticJointDef.localAxisA = axis;
+
+	return (b2PrismaticJoint*)world->CreateJoint(&prismaticJointDef);
+}
+
 
 // 
 update_status ModulePhysics::PostUpdate()
