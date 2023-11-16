@@ -18,4 +18,8 @@ public:
 
 public:
 
+	// Fx
+	unsigned int flopSound;
+	unsigned int boostSound;
+
 };
