@@ -41,13 +41,13 @@ bool ModuleSceneIntro::Start()
 	player = App->player;
 
 	// Create flip flops
-	flipFlopLeft = App->physics->CreateRectangle(400, 650, 80, 20, b2_dynamicBody);
-	flipFlopRight = App->physics->CreateRectangle(600, 650, 80, 20, b2_dynamicBody);
+	flipFlopLeft = App->physics->CreateRectangle(178, 670, 90, 10, b2_dynamicBody);
+	flipFlopRight = App->physics->CreateRectangle(404, 670, 90, 10, b2_dynamicBody);
 
 	//// Create anchors
-	flipFlopLeftAnchor = App->physics->CreateRectangle(400, 650, 1, 1, b2_staticBody);
-	flipFlopRightAnchor = App->physics->CreateRectangle(600, 650, 1, 1, b2_staticBody);
-	launcherAnchor = App->physics->CreateRectangle(400, 400, 1, 1, b2_staticBody);
+	flipFlopLeftAnchor = App->physics->CreateRectangle(178, 670, 1, 1, b2_staticBody);
+	flipFlopRightAnchor = App->physics->CreateRectangle(404, 670, 1, 1, b2_staticBody);
+	launcherAnchor = App->physics->CreateRectangle(575, 890, 1, 1, b2_staticBody);
 
 	// Deactivate anchors collisions
 	flipFlopLeftAnchor->body->GetFixtureList()->SetSensor(true);
