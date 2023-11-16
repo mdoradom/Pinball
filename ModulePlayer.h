@@ -22,4 +22,9 @@ public:
 	unsigned int flopSound;
 	unsigned int boostSound;
 
+	virtual void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
+	
+	int score;  // Variable para almacenar la puntuación.
+
+	void IncreaseScore(int points);
 };

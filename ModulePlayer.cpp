@@ -89,5 +89,16 @@ update_status ModulePlayer::Update()
 	return UPDATE_CONTINUE;
 }
 
+void ModulePlayer::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 
+	//Aumentar la puntuación en cualquier colisión de colliders.
+	IncreaseScore(10);
+}
+
+void ModulePlayer::IncreaseScore(int points) {
+	score += points;
+	// Puedes agregar aquí cualquier lógica adicional que necesites cuando la puntuación aumenta.
+	// Por ejemplo, mostrar un mensaje, reproducir un sonido, etc.
+
+}
 
