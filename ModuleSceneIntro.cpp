@@ -6,6 +6,7 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
+#include "ModuleFonts.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -90,8 +91,10 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update()
 {
 
-	// Draw map
+	// Draw maps
 	App->renderer->Blit(map, 0, 0, NULL, 1.0f, 0);
+
+	App->fonts->drawText("hola", { 255,255,255 }, 700, 60);
 
 	// Draw flip flops
 	int flipFlopLeftX, flipFlopLeftY, flipFlopRightX, flipFlopRightY;
