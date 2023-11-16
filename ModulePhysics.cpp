@@ -38,7 +38,7 @@ bool ModulePhysics::Start()
 
 	// MAP CREATION ----------------------------------
 	
-// Pivot -510, -638
+	// Pivot -510, -638
 	int scenario[150] = {
 		-446, 259,
 		-444, 83,
@@ -118,7 +118,7 @@ bool ModulePhysics::Start()
 	};
 
 
-	App->scene_intro->scene = App->physics->CreateChain(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.5f, scenario, 120);
+	App->scene_intro->scene = App->physics->CreateChain(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.5f, scenario, 149);
 
 	App->scene_intro->launcher = App->physics->CreateRectangle(500, 200, 20, 40, b2_dynamicBody);
 
