@@ -44,8 +44,8 @@ bool ModuleAudio::Init()
 		ret = true;
 	}
 
-	// Load and play the background music when the project starts
-	PlayMusic("Game/pinball/boost.wav", 0.0f);
+	//// Load and play the background music when the project starts
+	//PlayMusic("pinball/audio/background-music.wav", 0.0f);
 	
 	return ret;
 }
