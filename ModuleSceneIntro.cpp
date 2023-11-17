@@ -64,7 +64,7 @@ bool ModuleSceneIntro::Start()
 	float upperLimit = 450;
 	App->physics->CreatePrismaticJoint(launcherAnchor, { 0,0 }, App->scene_intro->launcher, { 0,0 }, lowerLimit, upperLimit, false, false, {0,1});
 
-	App->audio->PlayMusic("pinball/audio/background-music.wav", 0.0f);
+	App->audio->PlayMusic("pinball/audio/background-music-01.ogg", 0.0f);
 
 	return ret;
 }
