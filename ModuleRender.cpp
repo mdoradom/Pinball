@@ -210,3 +210,21 @@ bool ModuleRender::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 
 
 	return ret;
 }
+
+bool ModuleRender::BlitText(SDL_Texture* texture, int x, int y)
+{
+	SDL_Rect rect;
+	rect.x = (int)(camera.x + x * SCREEN_SIZE);
+	rect.y = (int)(camera.y + y * SCREEN_SIZE);
+	SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+	rect.w *= SCREEN_SIZE;
+	rect.h *= SCREEN_SIZE;
+
+	if (SDL_RenderCopy(renderer, texture, NULL, &rect) != 0)
+	{
+		LOG("Cannot blit text to screen. SDL_RenderCopy error: %s", SDL_GetError());
+		return false;
+	}
+
+	return true;
+}

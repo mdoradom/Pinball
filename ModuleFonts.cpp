@@ -31,7 +31,7 @@ bool ModuleFonts::Init()
 	}
 	else
 	{
-		font = TTF_OpenFont("pinball/fonts/KGLegoHouse.ttf", 18);
+		font = TTF_OpenFont("pinball/fonts/KGLegoHouse.ttf", 40);
 		if (font == NULL)
 		{
 			LOG("Couldn't load %d pt font from %s: %s\n",
@@ -55,6 +55,14 @@ bool ModuleFonts::CleanUp()
 	TTF_Quit();
 
 	return false;
+}
+
+SDL_Texture* ModuleFonts::LoadText(const char* text, SDL_Color color)
+{
+	SDL_Surface* surface = TTF_RenderText_Solid(font, text, color);
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(App->renderer->renderer, surface);
+	SDL_FreeSurface(surface);
+	return texture;
 }
 
 bool ModuleFonts::drawText(const char* string, SDL_Color color, int x, int y)

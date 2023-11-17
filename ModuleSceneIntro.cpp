@@ -94,7 +94,7 @@ update_status ModuleSceneIntro::Update()
 	// Draw maps
 	App->renderer->Blit(map, 0, 0, NULL, 1.0f, 0);
 
-	App->fonts->drawText("hola", { 255,255,255 }, 700, 60);
+	//App->fonts->drawText("hola", { 255,255,255 }, 700, 60);
 
 	// Draw flip flops
 	int flipFlopLeftX, flipFlopLeftY, flipFlopRightX, flipFlopRightY;

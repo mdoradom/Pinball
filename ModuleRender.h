@@ -24,4 +24,7 @@ public:
 public:
 	SDL_Renderer* renderer;
 	SDL_Rect camera;
+
+	//for fonts
+	bool BlitText(SDL_Texture* texture, int x, int y);
 };
