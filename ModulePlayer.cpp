@@ -130,6 +130,7 @@ void ModulePlayer::IncreaseScore(int points) {
 
 void ModulePlayer::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 
+	LOG("Collision detected!");
 	//Aumentar la puntuación en cualquier colisión de colliders.
 	IncreaseScore(10);
 }

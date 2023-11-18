@@ -234,7 +234,7 @@ update_status ModulePhysics::PreUpdate()
 		if(c->GetFixtureA()->IsSensor() && c->IsTouching())
 		{
 			PhysBody* pb1 = (PhysBody*)c->GetFixtureA()->GetBody()->GetUserData();
-			PhysBody* pb2 = (PhysBody*)c->GetFixtureA()->GetBody()->GetUserData();
+			PhysBody* pb2 = (PhysBody*)c->GetFixtureB()->GetBody()->GetUserData();
 			if(pb1 && pb2 && pb1->listener)
 				pb1->listener->OnCollision(pb1, pb2);
 		}
@@ -261,6 +261,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType bodyT
 
 	PhysBody* pbody = new PhysBody();
 	pbody->body = b;
+	pbody->listener = this;  // Configurar el puntero listener al módulo de física actual
 	b->SetUserData(pbody);
 	pbody->width = pbody->height = radius;
 
@@ -285,6 +286,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, b2
 
 	PhysBody* pbody = new PhysBody();
 	pbody->body = b;
+	pbody->listener = this;  // Configurar el puntero listener al módulo de física actual
 	b->SetUserData(pbody);
 	pbody->width = width * 0.5f;
 	pbody->height = height * 0.5f;
@@ -312,6 +314,7 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 
 	PhysBody* pbody = new PhysBody();
 	pbody->body = b;
+	pbody->listener = this;  // Configurar el puntero listener al módulo de física actual
 	b->SetUserData(pbody);
 	pbody->width = width;
 	pbody->height = height;
@@ -347,6 +350,7 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size)
 
 	PhysBody* pbody = new PhysBody();
 	pbody->body = b;
+	pbody->listener = this;  // Configurar el puntero listener al módulo de física actual
 	b->SetUserData(pbody);
 	pbody->width = pbody->height = 0;
 
@@ -625,9 +629,13 @@ void ModulePhysics::BeginContact(b2Contact* contact)
 	PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData();
 	PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
 
-	if(physA && physA->listener != NULL)
+	if (physA && physA->listener != NULL) {
 		physA->listener->OnCollision(physA, physB);
+		LOG("Collision detected for physA");
+	}
 
-	if(physB && physB->listener != NULL)
+	if (physB && physB->listener != NULL) {
 		physB->listener->OnCollision(physB, physA);
+		LOG("Collision detected for physB");
+	}
 }
