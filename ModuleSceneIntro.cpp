@@ -222,6 +222,32 @@ update_status ModuleSceneIntro::Update()
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
 
+	int curvedRect_top_left_pos[16] = {
+	160, 171,
+	150, 176,
+	140, 185,
+	132, 195,
+	138, 201,
+	145, 192,
+	152, 184,
+	165, 177
+	};
+
+	int curvedRect_top_right_pos[16] = {
+	465, 165,
+	480, 169,
+	495, 180,
+	503, 199,
+	494, 201,
+	487, 187,
+	476, 177,
+	464, 173
+	};
+
+	PhysBody* curvedRect_top_left = App->physics->CreateChainPoints(0, 0, curvedRect_top_left_pos, 16, bodyType::STATIC);
+	curvedRect_top_left->ctype = ColliderType::POINTS;
+	PhysBody* curvedRect_top_right = App->physics->CreateChainPoints(0, 0, curvedRect_top_right_pos, 16, bodyType::STATIC);
+	curvedRect_top_right->ctype = ColliderType::POINTS;
 	PhysBody* midBall_top_left = App->physics->CreateCirclePoints(102, 96, 25, bodyType::STATIC);
 	midBall_top_left->ctype = ColliderType::POINTS;
 	PhysBody* smallBall_top_left = App->physics->CreateCirclePoints(165, 253, 10, bodyType::STATIC);
