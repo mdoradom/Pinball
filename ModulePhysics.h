@@ -21,6 +21,18 @@
 #define DEGTORAD 0.0174532925199432957f
 #define RADTODEG 57.295779513082320876f
 
+// types of bodies
+enum bodyType {
+	DYNAMIC,
+	STATIC,
+	KINEMATIC
+};
+
+enum class ColliderType {
+	POINTS,
+	UNKNOWN
+	// ..
+};
 
 // Small class to return to other modules to track position and rotation of physics bodies
 class PhysBody
@@ -38,6 +50,7 @@ public:
 	int width, height;
 	b2Body* body;
 	Module* listener;
+	ColliderType ctype;
 
 	void ApplyBoost(float boostForce) {
 		
@@ -78,7 +91,9 @@ public:
 	bool CleanUp();
 
 	PhysBody* CreateCircle(int x, int y, int radius, b2BodyType bodyType);
+	PhysBody* CreateCirclePoints(int x, int y, int radious, bodyType type);
 	PhysBody* CreateRectangle(int x, int y, int width, int height, b2BodyType bodyType);
+	PhysBody* CreateRectanglePoints(int x, int y, int width, int height, bodyType bodyType);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 	PhysBody* CreateChain(int x, int y, int* points, int size);
 	b2RevoluteJoint* CreateRevoluteJoint(PhysBody* A, b2Vec2 anchorA, PhysBody* B, b2Vec2 anchorB, float lowerAngle, float upperAngle, float referenceAngle, bool collideConnected, bool enableLimit);

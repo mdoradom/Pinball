@@ -388,6 +388,66 @@ b2PrismaticJoint* ModulePhysics::CreatePrismaticJoint(PhysBody* A, b2Vec2 anchor
 	return (b2PrismaticJoint*)world->CreateJoint(&prismaticJointDef);
 }
 
+PhysBody* ModulePhysics::CreateCirclePoints(int x, int y, int radious, bodyType type)
+{
+	b2BodyDef body;
+
+	if (type == DYNAMIC) body.type = b2_dynamicBody;
+	if (type == STATIC) body.type = b2_staticBody;
+	if (type == KINEMATIC) body.type = b2_kinematicBody;
+
+	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
+
+	b2Body* b = world->CreateBody(&body);
+	b2CircleShape circle;
+	circle.m_radius = PIXEL_TO_METERS(radious);
+
+	b2FixtureDef fixture;
+	fixture.shape = &circle;
+	fixture.density = 2.0f;
+	fixture.restitution = 0.6f;
+	b->ResetMassData();
+
+	b->CreateFixture(&fixture);
+
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	b->SetUserData(pbody);
+	pbody->width = radious * 0.5f;
+	pbody->height = radious * 0.5f;
+
+	return pbody;
+}
+
+PhysBody* ModulePhysics::CreateRectanglePoints(int x, int y, int width, int height, bodyType bodyType)
+{
+	b2BodyDef body;
+
+	if (bodyType == DYNAMIC) body.type = b2_dynamicBody;
+	if (bodyType == STATIC) body.type = b2_staticBody;
+	if (bodyType == KINEMATIC) body.type = b2_kinematicBody;
+
+	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
+
+	b2Body* b = world->CreateBody(&body);
+	b2PolygonShape box;
+	box.SetAsBox(PIXEL_TO_METERS(width) * 0.5f, PIXEL_TO_METERS(height) * 0.5f);
+
+	b2FixtureDef fixture;
+	fixture.shape = &box;
+	fixture.density = 1.0f;
+
+	b->CreateFixture(&fixture);
+
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	b->SetUserData(pbody);
+	pbody->width = width * 0.5f;
+	pbody->height = height * 0.5f;
+
+	return pbody;
+}
+
 
 // 
 update_status ModulePhysics::PostUpdate()

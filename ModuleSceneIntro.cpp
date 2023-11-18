@@ -222,6 +222,29 @@ update_status ModuleSceneIntro::Update()
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
 
+	PhysBody* midBall_top_left = App->physics->CreateCirclePoints(102, 96, 25, bodyType::STATIC);
+	midBall_top_left->ctype = ColliderType::POINTS;
+	PhysBody* smallBall_top_left = App->physics->CreateCirclePoints(165, 253, 10, bodyType::STATIC);
+	smallBall_top_left->ctype = ColliderType::POINTS;
+	PhysBody* smallBall_mid_left = App->physics->CreateCirclePoints(187, 410, 10, bodyType::STATIC);
+	smallBall_mid_left->ctype = ColliderType::POINTS;
+	PhysBody* bigBall_mid_left = App->physics->CreateCirclePoints(300, 278, 34, bodyType::STATIC);
+	bigBall_mid_left->ctype = ColliderType::POINTS;
+	PhysBody* bigBall_top_right = App->physics->CreateCirclePoints(410, 246, 34, bodyType::STATIC);
+	bigBall_top_right->ctype = ColliderType::POINTS;
+	PhysBody* bigBall_mid_right = App->physics->CreateCirclePoints(382, 355, 34, bodyType::STATIC);
+	bigBall_mid_right->ctype = ColliderType::POINTS;
+	PhysBody* midRect_top_left = App->physics->CreateRectanglePoints(190 +24, 157 +5, 48, 10, bodyType::STATIC);
+	midRect_top_left->ctype = ColliderType::POINTS;
+	PhysBody* midRect_mid_left_vertical = App->physics->CreateRectanglePoints(157 +5, 282 + 14, 10, 28, bodyType::STATIC);
+	midRect_mid_left_vertical->ctype = ColliderType::POINTS;
+	PhysBody* midRect_mid_left = App->physics->CreateRectanglePoints(130 +18, 306 + 5, 36, 10, bodyType::STATIC);
+	midRect_mid_left->ctype = ColliderType::POINTS;
+	PhysBody* smallRect_bot_left = App->physics->CreateRectanglePoints(178+15, 545+5, 30, 10, bodyType::STATIC);
+	smallRect_bot_left->ctype = ColliderType::POINTS;
+	PhysBody* smallRect_bot_right = App->physics->CreateRectanglePoints(373 + 15, 545 + 5, 30, 10, bodyType::STATIC);
+	smallRect_bot_right->ctype = ColliderType::POINTS;
+
 	return UPDATE_CONTINUE;
 }
 
