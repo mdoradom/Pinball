@@ -117,12 +117,16 @@ bool ModuleSceneIntro::Start()
 	PhysBody* smallRect_bot_right = App->physics->CreateRectangleScore(388, 550, 30, 10, bodyType::STATIC);
 	smallRect_bot_right->ctype = ColliderType::SCORE25;
 
+
+
 	PhysBody* deathRect = App->physics->CreateRectangle(70+ 220, 892, 440, 2, b2_staticBody);
 	deathRect->ctype = ColliderType::DEATH;
 
 	scoreTexture = App->fonts->LoadText("0", { 255, 255, 255 });
+	ballTexture = App->fonts->LoadText("Balls: 5", { 255, 255, 255 });
 
 	score = 0;
+	bolas = 5;
 
 	return ret;
 }
@@ -160,6 +164,7 @@ update_status ModuleSceneIntro::Update()
 
 	// Dibujar la textura del marcador en la esquina superior derecha
 	App->renderer->BlitText(scoreTexture, SCREEN_WIDTH - 210, 85);
+	App->renderer->BlitText(ballTexture, SCREEN_WIDTH - 210, 270);
 
 	// Draw flip flops
 	int flipFlopLeftX, flipFlopLeftY, flipFlopRightX, flipFlopRightY;
@@ -388,4 +393,21 @@ void ModuleSceneIntro::IncreaseScore(int points) {
 	scoreTexture = App->fonts->LoadText(scoreText, { 255, 255, 255 });
 
 	App->audio->PlayFx(pointSound);
+}
+
+// pa los comentarios mira lo de arriba que es lo mismo bro
+void ModuleSceneIntro::BallCounter(int balls) {
+	bolas -= balls;
+
+	LOG("has perdido una bola subnormal ajaajajj, te quedan : %d", bolas);
+
+	char ballText[10];  
+	sprintf_s(ballText, "%d", bolas);  
+
+	if (ballTexture != nullptr) {
+		App->textures->Unload(ballTexture);
+		LOG("ballTexture liberado antes de cargar el nuevo");
+	}
+
+	ballTexture = App->fonts->LoadText(ballText, { 255, 0 , 255 });
 }
