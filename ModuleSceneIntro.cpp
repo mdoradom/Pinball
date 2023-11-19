@@ -304,6 +304,8 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			LOG("Collision DEATH")
 			BallCounter(1);
 
+			bodyA->body->SetAwake(false);
+
 			break;
 
 		case ColliderType::BOOST:
