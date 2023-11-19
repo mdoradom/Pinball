@@ -388,7 +388,7 @@ b2PrismaticJoint* ModulePhysics::CreatePrismaticJoint(PhysBody* A, b2Vec2 anchor
 	return (b2PrismaticJoint*)world->CreateJoint(&prismaticJointDef);
 }
 
-PhysBody* ModulePhysics::CreateCirclePoints(int x, int y, int radious, bodyType type)
+PhysBody* ModulePhysics::CreateCircleScore(int x, int y, int radious, bodyType type)
 {
 	b2BodyDef body;
 
@@ -419,7 +419,7 @@ PhysBody* ModulePhysics::CreateCirclePoints(int x, int y, int radious, bodyType 
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateRectanglePoints(int x, int y, int width, int height, bodyType bodyType)
+PhysBody* ModulePhysics::CreateRectangleScore(int x, int y, int width, int height, bodyType bodyType)
 {
 	b2BodyDef body;
 
@@ -448,7 +448,7 @@ PhysBody* ModulePhysics::CreateRectanglePoints(int x, int y, int width, int heig
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateChainPoints(int x, int y, int* points, int size, bodyType bodyType)
+PhysBody* ModulePhysics::CreateChainScore(int x, int y, int* points, int size, bodyType bodyType)
 {
 	b2BodyDef body;
 

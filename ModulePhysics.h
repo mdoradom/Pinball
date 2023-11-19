@@ -29,7 +29,13 @@ enum bodyType {
 };
 
 enum class ColliderType {
-	POINTS,
+	BALL,
+	SCORE5,
+	SCORE10,
+	SCORE15,
+	SCORE20,
+	SCORE25,
+	DEATH,
 	UNKNOWN
 	// ..
 };
@@ -91,12 +97,12 @@ public:
 	bool CleanUp();
 
 	PhysBody* CreateCircle(int x, int y, int radius, b2BodyType bodyType);
-	PhysBody* CreateCirclePoints(int x, int y, int radious, bodyType type);
+	PhysBody* CreateCircleScore(int x, int y, int radious, bodyType type);
 	PhysBody* CreateRectangle(int x, int y, int width, int height, b2BodyType bodyType);
-	PhysBody* CreateRectanglePoints(int x, int y, int width, int height, bodyType bodyType);
+	PhysBody* CreateRectangleScore(int x, int y, int width, int height, bodyType bodyType);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 	PhysBody* CreateChain(int x, int y, int* points, int size);
-	PhysBody* CreateChainPoints(int x, int y, int* points, int size, bodyType bodyType);
+	PhysBody* CreateChainScore(int x, int y, int* points, int size, bodyType bodyType);
 	b2RevoluteJoint* CreateRevoluteJoint(PhysBody* A, b2Vec2 anchorA, PhysBody* B, b2Vec2 anchorB, float lowerAngle, float upperAngle, float referenceAngle, bool collideConnected, bool enableLimit);
 	b2PrismaticJoint* CreatePrismaticJoint(PhysBody* A, b2Vec2 anchorA, PhysBody* B, b2Vec2 anchorB, float lowerTranslation, float upperTranslation, bool collideConnected, bool enableLimit, b2Vec2 axis);
 

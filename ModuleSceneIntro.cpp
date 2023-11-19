@@ -38,6 +38,8 @@ bool ModuleSceneIntro::Start()
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 
+	pointSound = App->audio->LoadFx("pinball/audio/Fx/bonus.ogg");
+
 	//sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
 	player = App->player;
@@ -88,32 +90,37 @@ bool ModuleSceneIntro::Start()
 	464, 173
 	};
 
-	PhysBody* curvedRect_top_left = App->physics->CreateChainPoints(0, 0, curvedRect_top_left_pos, 16, bodyType::STATIC);
-	curvedRect_top_left->ctype = ColliderType::POINTS;
-	PhysBody* curvedRect_top_right = App->physics->CreateChainPoints(0, 0, curvedRect_top_right_pos, 16, bodyType::STATIC);
-	curvedRect_top_right->ctype = ColliderType::POINTS;
-	PhysBody* midBall_top_left = App->physics->CreateCirclePoints(102, 96, 25, bodyType::STATIC);
-	midBall_top_left->ctype = ColliderType::POINTS;
-	PhysBody* smallBall_top_left = App->physics->CreateCirclePoints(165, 253, 10, bodyType::STATIC);
-	smallBall_top_left->ctype = ColliderType::POINTS;
-	PhysBody* smallBall_mid_left = App->physics->CreateCirclePoints(187, 410, 10, bodyType::STATIC);
-	smallBall_mid_left->ctype = ColliderType::POINTS;
-	PhysBody* bigBall_mid_left = App->physics->CreateCirclePoints(300, 278, 34, bodyType::STATIC);
-	bigBall_mid_left->ctype = ColliderType::POINTS;
-	PhysBody* bigBall_top_right = App->physics->CreateCirclePoints(410, 246, 34, bodyType::STATIC);
-	bigBall_top_right->ctype = ColliderType::POINTS;
-	PhysBody* bigBall_mid_right = App->physics->CreateCirclePoints(382, 355, 34, bodyType::STATIC);
-	bigBall_mid_right->ctype = ColliderType::POINTS;
-	PhysBody* midRect_top_left = App->physics->CreateRectangle(190 + 24, 1562, 48, 10, b2_dynamicBody);
-	midRect_top_left->ctype = ColliderType::POINTS;
-	PhysBody* midRect_mid_left_vertical = App->physics->CreateRectanglePoints(162, 282 + 14, 10, 28, bodyType::STATIC);
-	midRect_mid_left_vertical->ctype = ColliderType::POINTS;
-	PhysBody* midRect_mid_left = App->physics->CreateRectanglePoints(148, 309, 36, 10, bodyType::STATIC);
-	midRect_mid_left->ctype = ColliderType::POINTS;
-	PhysBody* smallRect_bot_left = App->physics->CreateRectanglePoints(178 + 15, 550, 30, 10, bodyType::STATIC);
-	smallRect_bot_left->ctype = ColliderType::POINTS;
-	PhysBody* smallRect_bot_right = App->physics->CreateRectanglePoints(373 + 15, 550, 30, 10, bodyType::STATIC);
-	smallRect_bot_right->ctype = ColliderType::POINTS;
+	PhysBody* curvedRect_top_left = App->physics->CreateChainScore(0, 0, curvedRect_top_left_pos, 16, bodyType::STATIC);
+	curvedRect_top_left->ctype = ColliderType::SCORE15;
+	PhysBody* curvedRect_top_right = App->physics->CreateChainScore(0, 0, curvedRect_top_right_pos, 16, bodyType::STATIC);
+	curvedRect_top_right->ctype = ColliderType::SCORE15;
+	PhysBody* midBall_top_left = App->physics->CreateCircleScore(102, 96, 25, bodyType::STATIC);
+	midBall_top_left->ctype = ColliderType::SCORE10;
+	PhysBody* smallBall_top_left = App->physics->CreateCircleScore(165, 253, 10, bodyType::STATIC);
+	smallBall_top_left->ctype = ColliderType::SCORE20;
+	PhysBody* smallBall_mid_left = App->physics->CreateCircleScore(187, 410, 10, bodyType::STATIC);
+	smallBall_mid_left->ctype = ColliderType::SCORE20;
+	PhysBody* bigBall_mid_left = App->physics->CreateCircleScore(300, 278, 34, bodyType::STATIC);
+	bigBall_mid_left->ctype = ColliderType::SCORE5;
+	PhysBody* bigBall_top_right = App->physics->CreateCircleScore(410, 246, 34, bodyType::STATIC);
+	bigBall_top_right->ctype = ColliderType::SCORE5;
+	PhysBody* bigBall_mid_right = App->physics->CreateCircleScore(382, 355, 34, bodyType::STATIC);
+	bigBall_mid_right->ctype = ColliderType::SCORE5;
+	PhysBody* midRect_top_left = App->physics->CreateRectangleScore(214, 161, 48, 10, bodyType::STATIC);
+	midRect_top_left->ctype = ColliderType::SCORE15;
+	PhysBody* midRect_mid_left_vertical = App->physics->CreateRectangleScore(162, 296, 10, 28, bodyType::STATIC);
+	midRect_mid_left_vertical->ctype = ColliderType::SCORE15;
+	PhysBody* midRect_mid_left = App->physics->CreateRectangleScore(148, 309, 36, 10, bodyType::STATIC);
+	midRect_mid_left->ctype = ColliderType::SCORE15;
+	PhysBody* smallRect_bot_left = App->physics->CreateRectangleScore(193, 550, 30, 10, bodyType::STATIC);
+	smallRect_bot_left->ctype = ColliderType::SCORE25;
+	PhysBody* smallRect_bot_right = App->physics->CreateRectangleScore(388, 550, 30, 10, bodyType::STATIC);
+	smallRect_bot_right->ctype = ColliderType::SCORE25;
+
+	PhysBody* deathRect = App->physics->CreateRectangle(70+ 220, 892, 440, 2, b2_staticBody);
+	deathRect->ctype = ColliderType::DEATH;
+
+	score = 0;
 
 	return ret;
 }
@@ -164,6 +171,7 @@ update_status ModuleSceneIntro::Update()
 	{
 		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 16, b2_dynamicBody ));
 		circles.getLast()->data->listener = this;
+		circles.getLast()->data->ctype = ColliderType::BALL;
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
@@ -279,6 +287,63 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	int x, y;
 
 	App->audio->PlayFx(bonus_fx);
+
+	if (bodyA->ctype == ColliderType::BALL)
+	{
+		switch (bodyB->ctype)
+		{
+		case ColliderType::SCORE5:
+			LOG("Collision SCORE5");
+			score += 5;
+			LOG("Score: %i", score);
+			App->audio->PlayFx(pointSound);
+
+			break;
+
+		case ColliderType::SCORE10:
+			LOG("Collision SCORE10");
+			score += 10;
+			LOG("Score: %i", score);
+			App->audio->PlayFx(pointSound);
+
+			break;
+
+		case ColliderType::SCORE15:
+			LOG("Collision SCORE15");
+			score += 15;
+			LOG("Score: %i", score);
+			App->audio->PlayFx(pointSound);
+
+			break;
+
+		case ColliderType::SCORE20:
+			LOG("Collision SCORE20");
+			score += 20;
+			LOG("Score: %i", score);
+			App->audio->PlayFx(pointSound);
+
+			break;
+
+		case ColliderType::SCORE25:
+			LOG("Collision SCORE25");
+			score += 25;
+			LOG("Score: %i", score);
+			App->audio->PlayFx(pointSound);
+
+			break;
+
+		case ColliderType::DEATH:
+			LOG("Collision DEATH")
+			circles.clear();
+
+			break;
+
+		case ColliderType::UNKNOWN:
+			LOG("Collision UNKNOWN");
+
+			break;
+	}
+	}
 
 	/*
 	if(bodyA)
