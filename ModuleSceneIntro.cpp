@@ -360,7 +360,4 @@ void ModuleSceneIntro::BallCounter(int balls) {
 
 	ballTexture = App->fonts->LoadText(ballText, { 255, 255 , 255 });
 
-	if (bolas == 0) {
-		LOG("has perdido todas las bolas, eres un inutil");		
-	}
 }

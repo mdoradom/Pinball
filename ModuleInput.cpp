@@ -1,5 +1,6 @@
 #include "Globals.h"
 #include "Application.h"
+#include "ModuleSceneIntro.h"
 #include "ModuleInput.h"
 
 #include "SDL\include\SDL.h"
@@ -82,6 +83,10 @@ update_status ModuleInput::PreUpdate()
 
 	if(keyboard[SDL_SCANCODE_ESCAPE] == KEY_UP)
 		return UPDATE_STOP;
+
+	if (App->scene_intro->bolas == 0) {
+		return UPDATE_STOP;
+	}
 
 	return UPDATE_CONTINUE;
 }
