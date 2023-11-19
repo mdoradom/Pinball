@@ -69,7 +69,7 @@ void ModulePlayer::moveFlipFlops() {
 void ModulePlayer::launchBall() {
 	const float initialImpulse = 5.0f;
 	const float maxImpulse = 100.0f;
-	const float impulseIncrement = 0.2f;
+	const float impulseIncrement = 0.4f;
 
 	static float currentImpulse = initialImpulse;
 
