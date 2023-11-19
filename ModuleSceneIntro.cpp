@@ -40,6 +40,8 @@ bool ModuleSceneIntro::Start()
 
 	pointSound = App->audio->LoadFx("pinball/audio/Fx/bonus.ogg");
 
+	App->audio->PlayMusic("pinball/audio/background-music-01.ogg", 0.0f);
+
 	//sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
 	player = App->player;
@@ -65,8 +67,6 @@ bool ModuleSceneIntro::Start()
 	float lowerLimit = 350;
 	float upperLimit = 450;
 	App->physics->CreatePrismaticJoint(launcherAnchor, { 0,0 }, App->scene_intro->launcher, { 0,0 }, lowerLimit, upperLimit, false, false, {0,1});
-
-	App->audio->PlayMusic("pinball/audio/background-music.wav", 0.0f);
 
 	int curvedRect_top_left_pos[16] = {
 	160, 171,
@@ -328,7 +328,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		case ColliderType::SCORE20:
 			LOG("Collision SCORE20");
 			IncreaseScore(20);
-			LOG("Score: %i", score);
+			LOG("Score: %i", score);	
 			App->audio->PlayFx(pointSound);
 
 			break;
