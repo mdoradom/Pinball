@@ -19,6 +19,9 @@ public:
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
+	void IncreaseScore(int points);
+	void BallCounter(int balls);
+
 public:
 	p2List<PhysBody*> circles;
 
@@ -53,11 +56,9 @@ public:
 	bool ray_on;
 	unsigned int pointSound;
 	unsigned int boostSound;
+	bool spawnOneBall = false;
 
 	// Puntero a scoreTexture
 	SDL_Texture* scoreTexture = nullptr;
 	SDL_Texture* ballTexture = nullptr;
-
-	void IncreaseScore(int points);
-	void BallCounter(int balls);
 };

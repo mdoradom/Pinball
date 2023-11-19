@@ -129,6 +129,11 @@ bool ModuleSceneIntro::Start()
 	PhysBody* deathRect = App->physics->CreateRectangle(70+ 220, 892, 440, 2, b2_staticBody);
 	deathRect->ctype = ColliderType::DEATH;
 
+	// Create ball
+	circles.add(App->physics->CreateCircle(575, 870, 16, b2_dynamicBody));
+	circles.getLast()->data->listener = this;
+	circles.getLast()->data->ctype = ColliderType::BALL;
+
 	scoreTexture = App->fonts->LoadText("0", { 255, 255, 255 });
 	ballTexture = App->fonts->LoadText("5", { 255, 255, 255 });
 
@@ -187,6 +192,15 @@ update_status ModuleSceneIntro::Update()
 
 	player->moveFlipFlops();
 	player->launchBall();
+
+	if (spawnOneBall) {
+		if (bolas > 0) {
+			spawnOneBall = false;
+			circles.add(App->physics->CreateCircle(575, 870, 16, b2_dynamicBody));
+			circles.getLast()->data->listener = this;
+			circles.getLast()->data->ctype = ColliderType::BALL;
+		}
+	}
 
 	if (App->physics->debug) {
 
@@ -346,6 +360,7 @@ void ModuleSceneIntro::IncreaseScore(int points) {
 
 // pa los comentarios mira lo de arriba que es lo mismo bro
 void ModuleSceneIntro::BallCounter(int balls) {
+
 	bolas -= balls;
 
 	LOG("has perdido una bola subnormal ajaajajj, te quedan : %d", bolas);
@@ -359,5 +374,7 @@ void ModuleSceneIntro::BallCounter(int balls) {
 	}
 
 	ballTexture = App->fonts->LoadText(ballText, { 255, 255 , 255 });
+
+	spawnOneBall = true;
 
 }
