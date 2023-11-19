@@ -21,6 +21,26 @@
 #define DEGTORAD 0.0174532925199432957f
 #define RADTODEG 57.295779513082320876f
 
+// types of bodies
+enum bodyType {
+	DYNAMIC,
+	STATIC,
+	KINEMATIC
+};
+
+enum class ColliderType {
+	BALL,
+	SCORE5,
+	SCORE10,
+	SCORE15,
+	SCORE20,
+	SCORE25,
+	DEATH,
+	BALLCOUNTER,
+	BOOST,
+	UNKNOWN
+	// ..
+};
 
 // Small class to return to other modules to track position and rotation of physics bodies
 class PhysBody
@@ -38,6 +58,7 @@ public:
 	int width, height;
 	b2Body* body;
 	Module* listener;
+	ColliderType ctype;
 
 	void ApplyBoost(float boostForce) {
 		
@@ -78,9 +99,13 @@ public:
 	bool CleanUp();
 
 	PhysBody* CreateCircle(int x, int y, int radius, b2BodyType bodyType);
+	PhysBody* CreateCircleScore(int x, int y, int radious, bodyType type);
 	PhysBody* CreateRectangle(int x, int y, int width, int height, b2BodyType bodyType);
+	PhysBody* CreateRectangleScore(int x, int y, int width, int height, bodyType bodyType);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 	PhysBody* CreateChain(int x, int y, int* points, int size);
+	PhysBody* CreateChainScore(int x, int y, int* points, int size, bodyType bodyType);
+	PhysBody* CreateBallCounter(int x, int y, int* points, int size, b2BodyType bodyType);
 	b2RevoluteJoint* CreateRevoluteJoint(PhysBody* A, b2Vec2 anchorA, PhysBody* B, b2Vec2 anchorB, float lowerAngle, float upperAngle, float referenceAngle, bool collideConnected, bool enableLimit);
 	b2PrismaticJoint* CreatePrismaticJoint(PhysBody* A, b2Vec2 anchorA, PhysBody* B, b2Vec2 anchorB, float lowerTranslation, float upperTranslation, bool collideConnected, bool enableLimit, b2Vec2 axis);
 

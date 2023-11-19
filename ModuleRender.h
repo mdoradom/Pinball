@@ -27,4 +27,5 @@ public:
 
 	//for fonts
 	bool BlitText(SDL_Texture* texture, int x, int y);
+
 };

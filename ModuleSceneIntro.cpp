@@ -38,6 +38,11 @@ bool ModuleSceneIntro::Start()
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 
+	pointSound = App->audio->LoadFx("pinball/audio/Fx/bonus.ogg");
+	boostSound = App->audio->LoadFx("pinball/audio/Fx/boost.ogg");
+
+	App->audio->PlayMusic("pinball/audio/background-music-01.ogg", 0.0f);
+
 	//sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
 	player = App->player;
@@ -64,7 +69,71 @@ bool ModuleSceneIntro::Start()
 	float upperLimit = 450;
 	App->physics->CreatePrismaticJoint(launcherAnchor, { 0,0 }, App->scene_intro->launcher, { 0,0 }, lowerLimit, upperLimit, false, false, {0,1});
 
-	App->audio->PlayMusic("pinball/audio/background-music-01.ogg", 0.0f);
+	int curvedRect_top_left_pos[16] = {
+	160, 171,
+	150, 176,
+	140, 185,
+	132, 195,
+	138, 201,
+	145, 192,
+	152, 184,
+	165, 177
+	};
+
+	int curvedRect_top_right_pos[16] = {
+	465, 165,
+	480, 169,
+	495, 180,
+	503, 199,
+	494, 201,
+	487, 187,
+	476, 177,
+	464, 173
+	};
+
+	PhysBody* curvedRect_top_left = App->physics->CreateChainScore(0, 0, curvedRect_top_left_pos, 16, bodyType::STATIC);
+	curvedRect_top_left->ctype = ColliderType::SCORE15;
+	PhysBody* curvedRect_top_right = App->physics->CreateChainScore(0, 0, curvedRect_top_right_pos, 16, bodyType::STATIC);
+	curvedRect_top_right->ctype = ColliderType::SCORE15;
+	PhysBody* midBall_top_left = App->physics->CreateCircleScore(102, 96, 25, bodyType::STATIC);
+	midBall_top_left->ctype = ColliderType::SCORE10;
+	PhysBody* smallBall_top_left = App->physics->CreateCircleScore(165, 253, 10, bodyType::STATIC);
+	smallBall_top_left->ctype = ColliderType::SCORE20;
+	PhysBody* smallBall_mid_left = App->physics->CreateCircleScore(187, 410, 10, bodyType::STATIC);
+	smallBall_mid_left->ctype = ColliderType::SCORE20;
+	PhysBody* bigBall_mid_left = App->physics->CreateCircleScore(300, 278, 34, bodyType::STATIC);
+	bigBall_mid_left->ctype = ColliderType::SCORE5;
+	PhysBody* bigBall_top_right = App->physics->CreateCircleScore(410, 246, 34, bodyType::STATIC);
+	bigBall_top_right->ctype = ColliderType::SCORE5;
+	PhysBody* bigBall_mid_right = App->physics->CreateCircleScore(382, 355, 34, bodyType::STATIC);
+	bigBall_mid_right->ctype = ColliderType::SCORE5;
+	PhysBody* midRect_top_left = App->physics->CreateRectangleScore(214, 161, 48, 10, bodyType::STATIC);
+	midRect_top_left->ctype = ColliderType::SCORE15;
+	PhysBody* midRect_mid_left_vertical = App->physics->CreateRectangleScore(162, 296, 10, 28, bodyType::STATIC);
+	midRect_mid_left_vertical->ctype = ColliderType::SCORE15;
+	PhysBody* midRect_mid_left = App->physics->CreateRectangleScore(148, 309, 36, 10, bodyType::STATIC);
+	midRect_mid_left->ctype = ColliderType::SCORE15;
+	PhysBody* smallRect_bot_left = App->physics->CreateRectangleScore(193, 550, 30, 10, bodyType::STATIC);
+	smallRect_bot_left->ctype = ColliderType::SCORE25;
+	PhysBody* smallRect_bot_right = App->physics->CreateRectangleScore(388, 550, 30, 10, bodyType::STATIC);
+	smallRect_bot_right->ctype = ColliderType::SCORE25;
+
+
+	// Create boost colliders
+	PhysBody* boostCollider = App->physics->CreateRectangle(95, 250, 40, 100, b2_staticBody);
+	boostCollider->body->GetFixtureList()->SetSensor(true);
+	boostCollider->ctype = ColliderType::BOOST;
+
+
+
+	PhysBody* deathRect = App->physics->CreateRectangle(70+ 220, 892, 440, 2, b2_staticBody);
+	deathRect->ctype = ColliderType::DEATH;
+
+	scoreTexture = App->fonts->LoadText("0", { 255, 255, 255 });
+	ballTexture = App->fonts->LoadText("5", { 255, 255, 255 });
+
+	score = 0;
+	bolas = 5;
 
 	return ret;
 }
@@ -84,6 +153,12 @@ bool ModuleSceneIntro::CleanUp()
 	App->textures->Unload(flipFlopRightTexture);
 	App->textures->Unload(elevator);
 
+	if (scoreTexture != nullptr) {
+		App->textures->Unload(scoreTexture);
+		scoreTexture = nullptr;
+	}
+
+
 	return true;
 }
 
@@ -94,7 +169,9 @@ update_status ModuleSceneIntro::Update()
 	// Draw maps
 	App->renderer->Blit(map, 0, 0, NULL, 1.0f, 0);
 
-	//App->fonts->drawText("hola", { 255,255,255 }, 700, 60);
+	// Dibujar la textura del marcador en la esquina superior derecha
+	App->renderer->BlitText(scoreTexture, SCREEN_WIDTH - 210, 85);
+	App->renderer->BlitText(ballTexture, SCREEN_WIDTH - 210, 270);
 
 	// Draw flip flops
 	int flipFlopLeftX, flipFlopLeftY, flipFlopRightX, flipFlopRightY;
@@ -115,6 +192,7 @@ update_status ModuleSceneIntro::Update()
 	{
 		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 16, b2_dynamicBody ));
 		circles.getLast()->data->listener = this;
+		circles.getLast()->data->ctype = ColliderType::BALL;
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
@@ -231,6 +309,72 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 	App->audio->PlayFx(bonus_fx);
 
+	if (bodyA->ctype == ColliderType::BALL)
+	{
+		switch (bodyB->ctype)
+		{
+		case ColliderType::SCORE5:
+			LOG("Collision SCORE5");
+			IncreaseScore(5);
+			LOG("Score: %i", score);
+			App->audio->PlayFx(pointSound);
+
+			break;
+
+		case ColliderType::SCORE10:
+			LOG("Collision SCORE10");
+			IncreaseScore(10);
+			LOG("Score: %i", score);
+			App->audio->PlayFx(pointSound);
+
+			break;
+
+		case ColliderType::SCORE15:
+			LOG("Collision SCORE15");
+			IncreaseScore(15);
+			LOG("Score: %i", score);
+			App->audio->PlayFx(pointSound);
+
+			break;
+
+		case ColliderType::SCORE20:
+			LOG("Collision SCORE20");
+			IncreaseScore(20);
+			LOG("Score: %i", score);	
+			App->audio->PlayFx(pointSound);
+
+			break;
+
+		case ColliderType::SCORE25:
+			LOG("Collision SCORE25");
+			IncreaseScore(25);
+			LOG("Score: %i", score);
+			App->audio->PlayFx(pointSound);
+
+			break;
+
+		case ColliderType::DEATH:
+			LOG("Collision DEATH")
+
+			break;
+
+		case ColliderType::BOOST:
+
+			App->audio->PlayFx(boostSound);
+
+			bodyA->ApplyVerticalImpulse(-50);
+
+			LOG("Collision BOOST")
+
+			break;
+
+		case ColliderType::UNKNOWN:
+			LOG("Collision UNKNOWN");
+
+			break;
+	}
+	}
+
 	/*
 	if(bodyA)
 	{
@@ -243,4 +387,43 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		bodyB->GetPosition(x, y);
 		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
 	}*/
+}
+
+void ModuleSceneIntro::IncreaseScore(int points) {
+
+	score += points;
+
+	LOG("sumas puntos uwu, Puntaje actualizado: %d", score);
+
+	// Actualizar la textura del puntaje
+	char scoreText[10];  // Asegurarse de q el tamaño sea suficiente
+	sprintf_s(scoreText, "%d", score);  // Convierte el puntaje a cadena
+
+	// Libera la textura antigua antes de cargar la nueva
+	if (scoreTexture != nullptr) {
+		App->textures->Unload(scoreTexture);
+		LOG("scoreTexture liberado antes de cargar el nuevo");
+	}
+
+	// Carga la nueva textura del puntaje
+	scoreTexture = App->fonts->LoadText(scoreText, { 255, 255, 255 });
+
+	App->audio->PlayFx(pointSound);
+}
+
+// pa los comentarios mira lo de arriba que es lo mismo bro
+void ModuleSceneIntro::BallCounter(int balls) {
+	bolas -= balls;
+
+	LOG("has perdido una bola subnormal ajaajajj, te quedan : %d", bolas);
+
+	char ballText[10];  
+	sprintf_s(ballText,"%d", bolas);  
+
+	if (ballTexture != nullptr) {
+		App->textures->Unload(ballTexture);
+		LOG("ballTexture liberado antes de cargar el nuevo");
+	}
+
+	ballTexture = App->fonts->LoadText(ballText, { 255, 0 , 255 });
 }

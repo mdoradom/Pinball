@@ -49,6 +49,17 @@ public:
 	PhysBody* launcherAnchor;
 
 	uint bonus_fx;
+	int score;
+	int bolas;
 	p2Point<int> ray;
 	bool ray_on;
+	unsigned int pointSound;
+	unsigned int boostSound;
+
+	// Puntero a scoreTexture
+	SDL_Texture* scoreTexture = nullptr;
+	SDL_Texture* ballTexture = nullptr;
+
+	void IncreaseScore(int points);
+	void BallCounter(int balls);
 };
