@@ -54,6 +54,7 @@ public:
 	p2Point<int> ray;
 	bool ray_on;
 	unsigned int pointSound;
+	unsigned int boostSound;
 
 	// Puntero a scoreTexture
 	SDL_Texture* scoreTexture = nullptr;

@@ -37,6 +37,7 @@ enum class ColliderType {
 	SCORE25,
 	DEATH,
 	BALLCOUNTER,
+	BOOST,
 	UNKNOWN
 	// ..
 };

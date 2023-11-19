@@ -55,7 +55,7 @@ void ModulePlayer::moveFlipFlops() {
 
 		App->scene_intro->flipFlopRight->body->ApplyForce(
 			{ 0,-80 }, 
-			{ 0,0 }, 
+			{ 0,0 },
 			true
 		);
 
@@ -64,21 +64,13 @@ void ModulePlayer::moveFlipFlops() {
 		LOG("ole la derecha ARRIBA ESPAÑIA");
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-
-		App->scene_intro->launcher->ApplyVerticalImpulse(50);
-
-		App->audio->PlayFx(boostSound);
-
-		LOG("ole la derecha ARRIBA ESPAÑIA");
-
-	}
-
 }
 
 void ModulePlayer::launchBall() {
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+		App->audio->PlayFx(boostSound);
+		App->scene_intro->launcher->ApplyVerticalImpulse(50);
 		LOG("Pulsasto espacio ermano");
 	}
 

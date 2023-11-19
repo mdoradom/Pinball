@@ -39,6 +39,7 @@ bool ModuleSceneIntro::Start()
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 
 	pointSound = App->audio->LoadFx("pinball/audio/Fx/bonus.ogg");
+	boostSound = App->audio->LoadFx("pinball/audio/Fx/boost.ogg");
 
 	App->audio->PlayMusic("pinball/audio/background-music-01.ogg", 0.0f);
 
@@ -116,6 +117,12 @@ bool ModuleSceneIntro::Start()
 	smallRect_bot_left->ctype = ColliderType::SCORE25;
 	PhysBody* smallRect_bot_right = App->physics->CreateRectangleScore(388, 550, 30, 10, bodyType::STATIC);
 	smallRect_bot_right->ctype = ColliderType::SCORE25;
+
+
+	// Create boost colliders
+	PhysBody* boostCollider = App->physics->CreateRectangle(95, 250, 40, 100, b2_staticBody);
+	boostCollider->body->GetFixtureList()->SetSensor(true);
+	boostCollider->ctype = ColliderType::BOOST;
 
 
 
@@ -348,7 +355,16 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 		case ColliderType::DEATH:
 			LOG("Collision DEATH")
-			circles.clear();
+
+			break;
+
+		case ColliderType::BOOST:
+
+			App->audio->PlayFx(boostSound);
+
+			bodyA->ApplyVerticalImpulse(-50);
+
+			LOG("Collision BOOST")
 
 			break;
 
