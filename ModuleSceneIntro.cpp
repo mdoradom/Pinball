@@ -123,7 +123,7 @@ bool ModuleSceneIntro::Start()
 	deathRect->ctype = ColliderType::DEATH;
 
 	scoreTexture = App->fonts->LoadText("0", { 255, 255, 255 });
-	ballTexture = App->fonts->LoadText("Balls: 5", { 255, 255, 255 });
+	ballTexture = App->fonts->LoadText("5", { 255, 255, 255 });
 
 	score = 0;
 	bolas = 5;
@@ -402,7 +402,7 @@ void ModuleSceneIntro::BallCounter(int balls) {
 	LOG("has perdido una bola subnormal ajaajajj, te quedan : %d", bolas);
 
 	char ballText[10];  
-	sprintf_s(ballText, "%d", bolas);  
+	sprintf_s(ballText,"%d", bolas);  
 
 	if (ballTexture != nullptr) {
 		App->textures->Unload(ballTexture);
