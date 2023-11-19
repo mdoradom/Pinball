@@ -1,6 +1,6 @@
 # Pinball
 
-[![https://github.com/mdoradom/Pinball/releases/tag/Release](https://img.shields.io/github/release/tterb/PlayMusic.svg?style=flat)]()  
+[![https://github.com/mdoradom/Pinball/releases/download/Release/pinball_very-serious-games.zip](https://img.shields.io/github/release/tterb/PlayMusic.svg?style=flat)]()  
 
 Game developed by [Very Serious Games](https://github.com/Very-Serious-Games/)
 
