@@ -315,6 +315,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		{
 		case ColliderType::SCORE5:
 			LOG("Collision SCORE5");
+			bodyA->body->SetLinearVelocity(b2Vec2(bodyA->body->GetLinearVelocity().x * 1.2f, (bodyA->body->GetLinearVelocity().y * 1.2f)));
 			IncreaseScore(5);
 			LOG("Score: %i", score);
 			App->audio->PlayFx(pointSound);
@@ -323,6 +324,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 		case ColliderType::SCORE10:
 			LOG("Collision SCORE10");
+			bodyA->body->SetLinearVelocity(b2Vec2(bodyA->body->GetLinearVelocity().x * 1.2f, (bodyA->body->GetLinearVelocity().y * 1.2f)));
 			IncreaseScore(10);
 			LOG("Score: %i", score);
 			App->audio->PlayFx(pointSound);
@@ -331,6 +333,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 		case ColliderType::SCORE15:
 			LOG("Collision SCORE15");
+			bodyA->body->SetLinearVelocity(b2Vec2(bodyA->body->GetLinearVelocity().x * 1.2f, (bodyA->body->GetLinearVelocity().y * 1.2f)));
 			IncreaseScore(15);
 			LOG("Score: %i", score);
 			App->audio->PlayFx(pointSound);
@@ -339,6 +342,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 		case ColliderType::SCORE20:
 			LOG("Collision SCORE20");
+			bodyA->body->SetLinearVelocity(b2Vec2(bodyA->body->GetLinearVelocity().x * 1.2f, (bodyA->body->GetLinearVelocity().y * 1.2f)));
 			IncreaseScore(20);
 			LOG("Score: %i", score);	
 			App->audio->PlayFx(pointSound);
@@ -347,6 +351,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 		case ColliderType::SCORE25:
 			LOG("Collision SCORE25");
+			bodyA->body->SetLinearVelocity(b2Vec2(bodyA->body->GetLinearVelocity().x * 1.2f, (bodyA->body->GetLinearVelocity().y * 1.2f)));
 			IncreaseScore(25);
 			LOG("Score: %i", score);
 			App->audio->PlayFx(pointSound);
