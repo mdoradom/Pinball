@@ -67,13 +67,29 @@ void ModulePlayer::moveFlipFlops() {
 }
 
 void ModulePlayer::launchBall() {
+	const float initialImpulse = 5.0f;
+	const float maxImpulse = 100.0f;
+	const float impulseIncrement = 0.2f;
+
+	static float currentImpulse = initialImpulse;
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-		App->audio->PlayFx(boostSound);
-		App->scene_intro->launcher->ApplyVerticalImpulse(50);
-		LOG("Pulsasto espacio ermano");
+		currentImpulse = initialImpulse;
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
+		if (currentImpulse < maxImpulse) {
+			currentImpulse += impulseIncrement;
+		}
+		LOG("Impulso actual: %f", currentImpulse);
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP) {
+		//currentImpulse / 10;
+		App->scene_intro->launcher->ApplyVerticalImpulse(currentImpulse);
+		LOG("Impulso aplicado: %f", currentImpulse);
+		App->audio->PlayFx(boostSound);
+	}
 }
 
 // Update: draw background
