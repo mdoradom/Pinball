@@ -91,41 +91,41 @@ bool ModuleSceneIntro::Start()
 	464, 173
 	};
 
-	PhysBody* curvedRect_top_left = App->physics->CreateChainScore(0, 0, curvedRect_top_left_pos, 16, bodyType::STATIC);
-	curvedRect_top_left->ctype = ColliderType::SCORE15;
-	PhysBody* curvedRect_top_right = App->physics->CreateChainScore(0, 0, curvedRect_top_right_pos, 16, bodyType::STATIC);
-	curvedRect_top_right->ctype = ColliderType::SCORE15;
-	PhysBody* midBall_top_left = App->physics->CreateCircleScore(102, 96, 25, bodyType::STATIC);
-	midBall_top_left->ctype = ColliderType::SCORE10;
-	PhysBody* smallBall_top_left = App->physics->CreateCircleScore(165, 253, 10, bodyType::STATIC);
-	smallBall_top_left->ctype = ColliderType::SCORE20;
-	PhysBody* smallBall_mid_left = App->physics->CreateCircleScore(187, 410, 10, bodyType::STATIC);
-	smallBall_mid_left->ctype = ColliderType::SCORE20;
-	PhysBody* bigBall_mid_left = App->physics->CreateCircleScore(300, 278, 34, bodyType::STATIC);
-	bigBall_mid_left->ctype = ColliderType::SCORE5;
-	PhysBody* bigBall_top_right = App->physics->CreateCircleScore(410, 246, 34, bodyType::STATIC);
-	bigBall_top_right->ctype = ColliderType::SCORE5;
-	PhysBody* bigBall_mid_right = App->physics->CreateCircleScore(382, 355, 34, bodyType::STATIC);
-	bigBall_mid_right->ctype = ColliderType::SCORE5;
-	PhysBody* midRect_top_left = App->physics->CreateRectangleScore(214, 161, 48, 10, bodyType::STATIC);
-	midRect_top_left->ctype = ColliderType::SCORE15;
-	PhysBody* midRect_mid_left_vertical = App->physics->CreateRectangleScore(162, 296, 10, 28, bodyType::STATIC);
-	midRect_mid_left_vertical->ctype = ColliderType::SCORE15;
-	PhysBody* midRect_mid_left = App->physics->CreateRectangleScore(148, 309, 36, 10, bodyType::STATIC);
-	midRect_mid_left->ctype = ColliderType::SCORE15;
-	PhysBody* smallRect_bot_left = App->physics->CreateRectangleScore(193, 550, 30, 10, bodyType::STATIC);
-	smallRect_bot_left->ctype = ColliderType::SCORE25;
-	PhysBody* smallRect_bot_right = App->physics->CreateRectangleScore(388, 550, 30, 10, bodyType::STATIC);
-	smallRect_bot_right->ctype = ColliderType::SCORE25;
-
+	{
+		PhysBody* curvedRect_top_left = App->physics->CreateChainScore(0, 0, curvedRect_top_left_pos, 16, bodyType::STATIC);
+		curvedRect_top_left->ctype = ColliderType::SCORE15;
+		PhysBody* curvedRect_top_right = App->physics->CreateChainScore(0, 0, curvedRect_top_right_pos, 16, bodyType::STATIC);
+		curvedRect_top_right->ctype = ColliderType::SCORE15;
+		PhysBody* midBall_top_left = App->physics->CreateCircleScore(102, 96, 25, bodyType::STATIC);
+		midBall_top_left->ctype = ColliderType::SCORE10;
+		PhysBody* smallBall_top_left = App->physics->CreateCircleScore(165, 253, 10, bodyType::STATIC);
+		smallBall_top_left->ctype = ColliderType::SCORE20;
+		PhysBody* smallBall_mid_left = App->physics->CreateCircleScore(187, 410, 10, bodyType::STATIC);
+		smallBall_mid_left->ctype = ColliderType::SCORE20;
+		PhysBody* bigBall_mid_left = App->physics->CreateCircleScore(300, 278, 34, bodyType::STATIC);
+		bigBall_mid_left->ctype = ColliderType::SCORE5;
+		PhysBody* bigBall_top_right = App->physics->CreateCircleScore(410, 246, 34, bodyType::STATIC);
+		bigBall_top_right->ctype = ColliderType::SCORE5;
+		PhysBody* bigBall_mid_right = App->physics->CreateCircleScore(382, 355, 34, bodyType::STATIC);
+		bigBall_mid_right->ctype = ColliderType::SCORE5;
+		PhysBody* midRect_top_left = App->physics->CreateRectangleScore(214, 161, 48, 10, bodyType::STATIC);
+		midRect_top_left->ctype = ColliderType::SCORE15;
+		PhysBody* midRect_mid_left_vertical = App->physics->CreateRectangleScore(162, 296, 10, 28, bodyType::STATIC);
+		midRect_mid_left_vertical->ctype = ColliderType::SCORE15;
+		PhysBody* midRect_mid_left = App->physics->CreateRectangleScore(148, 309, 36, 10, bodyType::STATIC);
+		midRect_mid_left->ctype = ColliderType::SCORE15;
+		PhysBody* smallRect_bot_left = App->physics->CreateRectangleScore(193, 550, 30, 10, bodyType::STATIC);
+		smallRect_bot_left->ctype = ColliderType::SCORE25;
+		PhysBody* smallRect_bot_right = App->physics->CreateRectangleScore(388, 550, 30, 10, bodyType::STATIC);
+		smallRect_bot_right->ctype = ColliderType::SCORE25;
+	}
 
 	// Create boost colliders
 	PhysBody* boostCollider = App->physics->CreateRectangle(95, 250, 40, 100, b2_staticBody);
 	boostCollider->body->GetFixtureList()->SetSensor(true);
 	boostCollider->ctype = ColliderType::BOOST;
 
-
-
+	// Create death colliders
 	PhysBody* deathRect = App->physics->CreateRectangle(70+ 220, 892, 440, 2, b2_staticBody);
 	deathRect->ctype = ColliderType::DEATH;
 
