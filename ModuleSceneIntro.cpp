@@ -355,6 +355,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 		case ColliderType::DEATH:
 			LOG("Collision DEATH")
+			BallCounter(1);
 
 			break;
 
@@ -367,7 +368,6 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			LOG("Collision BOOST")
 
 			break;
-
 		case ColliderType::UNKNOWN:
 			LOG("Collision UNKNOWN");
 
@@ -425,5 +425,9 @@ void ModuleSceneIntro::BallCounter(int balls) {
 		LOG("ballTexture liberado antes de cargar el nuevo");
 	}
 
-	ballTexture = App->fonts->LoadText(ballText, { 255, 0 , 255 });
+	ballTexture = App->fonts->LoadText(ballText, { 255, 255 , 255 });
+
+	if (bolas == 0) {
+		LOG("has perdido todas las bolas, eres un inutil");		
+	}
 }
