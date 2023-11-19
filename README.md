@@ -1,5 +1,7 @@
 # Pinball
 
+[![https://github.com/mdoradom/Pinball/releases/tag/Release](https://img.shields.io/github/release/tterb/PlayMusic.svg?style=flat)]()  
+
 Game developed by [Very Serious Games](https://github.com/Very-Serious-Games/)
 
 - [@mdoradom](https://www.github.com/mdoradom)
