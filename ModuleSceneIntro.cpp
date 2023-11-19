@@ -120,6 +120,8 @@ bool ModuleSceneIntro::Start()
 	PhysBody* deathRect = App->physics->CreateRectangle(70+ 220, 892, 440, 2, b2_staticBody);
 	deathRect->ctype = ColliderType::DEATH;
 
+	scoreTexture = App->fonts->LoadText("0", { 255, 255, 255 });
+
 	score = 0;
 
 	return ret;
@@ -140,6 +142,12 @@ bool ModuleSceneIntro::CleanUp()
 	App->textures->Unload(flipFlopRightTexture);
 	App->textures->Unload(elevator);
 
+	if (scoreTexture != nullptr) {
+		App->textures->Unload(scoreTexture);
+		scoreTexture = nullptr;
+	}
+
+
 	return true;
 }
 
@@ -150,7 +158,8 @@ update_status ModuleSceneIntro::Update()
 	// Draw maps
 	App->renderer->Blit(map, 0, 0, NULL, 1.0f, 0);
 
-	App->fonts->drawText("hola", { 255,255,255 }, 700, 60);
+	// Dibujar la textura del marcador en la esquina superior derecha
+	App->renderer->BlitText(scoreTexture, SCREEN_WIDTH - 210, 85);
 
 	// Draw flip flops
 	int flipFlopLeftX, flipFlopLeftY, flipFlopRightX, flipFlopRightY;
@@ -294,7 +303,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		{
 		case ColliderType::SCORE5:
 			LOG("Collision SCORE5");
-			score += 5;
+			IncreaseScore(5);
 			LOG("Score: %i", score);
 			App->audio->PlayFx(pointSound);
 
@@ -302,7 +311,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 		case ColliderType::SCORE10:
 			LOG("Collision SCORE10");
-			score += 10;
+			IncreaseScore(10);
 			LOG("Score: %i", score);
 			App->audio->PlayFx(pointSound);
 
@@ -310,7 +319,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 		case ColliderType::SCORE15:
 			LOG("Collision SCORE15");
-			score += 15;
+			IncreaseScore(15);
 			LOG("Score: %i", score);
 			App->audio->PlayFx(pointSound);
 
@@ -318,7 +327,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 		case ColliderType::SCORE20:
 			LOG("Collision SCORE20");
-			score += 20;
+			IncreaseScore(20);
 			LOG("Score: %i", score);
 			App->audio->PlayFx(pointSound);
 
@@ -326,7 +335,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 		case ColliderType::SCORE25:
 			LOG("Collision SCORE25");
-			score += 25;
+			IncreaseScore(25);
 			LOG("Score: %i", score);
 			App->audio->PlayFx(pointSound);
 
@@ -357,4 +366,26 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		bodyB->GetPosition(x, y);
 		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
 	}*/
+}
+
+void ModuleSceneIntro::IncreaseScore(int points) {
+
+	score += points;
+
+	LOG("sumas puntos uwu, Puntaje actualizado: %d", score);
+
+	// Actualizar la textura del puntaje
+	char scoreText[10];  // Asegurarse de q el tamaño sea suficiente
+	sprintf_s(scoreText, "%d", score);  // Convierte el puntaje a cadena
+
+	// Libera la textura antigua antes de cargar la nueva
+	if (scoreTexture != nullptr) {
+		App->textures->Unload(scoreTexture);
+		LOG("scoreTexture liberado antes de cargar el nuevo");
+	}
+
+	// Carga la nueva textura del puntaje
+	scoreTexture = App->fonts->LoadText(scoreText, { 255, 255, 255 });
+
+	App->audio->PlayFx(pointSound);
 }

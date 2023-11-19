@@ -25,4 +25,5 @@ public:
 
 	TTF_Font* font;
 	SDL_Texture* texture;
+	SDL_Texture* LoadText(const char* text, SDL_Color color);
 };
